@@ -44,9 +44,8 @@ Har selv bare gjort alt i ett prosjekt, og selv om jeg gjerne vil lære å sette
 - /checkout: Siden for å fullføre bestilling gitt søkeparameterne
 - /api/departures: API rute for å hente avgangsinformasjon
 
-
-
-
+## Funksjonalitet og valg
+- For å unngå søkeparametere på hovedsiden (og dermed litt rotete hovedURL), valgte jeg bort å lagre søkeargument ved refresh. For å gjøre det mulig å dele søk, bruker jeg URL-søkeargumenter på avgangssiden, og sender disse videre til checkout-siden.
 
 ## Ekstra funksjonalitet jeg kanskje legger til:
 - Språkstøtte

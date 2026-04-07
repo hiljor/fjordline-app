@@ -5,8 +5,8 @@ import Header from "./components/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Reise-App | Bestill din neste tur",
-  description: "Enkel og rask bestilling av fergeavganger",
+  title: "Fjordline",
+  description: "Enkel og rask bestilling av fergeavganger mellom Bergen, Stavanger, Kristiansand og Hirtshals.",
 };
 
 export default function RootLayout({

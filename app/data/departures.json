@@ -1,0 +1,58 @@
+[
+  {
+    "id": "FL101",
+    "from": "Bergen",
+    "to": "Stavanger",
+    "departureTime": "2026-04-10T13:30:00",
+    "arrivalTime": "2026-04-10T19:00:00",
+    "price": 450,
+    "vessel": "MS Stavangerfjord",
+    "availableSeats": 120,
+    "category": "Innenriks"
+  },
+  {
+    "id": "FL102",
+    "from": "Bergen",
+    "to": "Hirtshals",
+    "departureTime": "2026-04-10T13:30:00",
+    "arrivalTime": "2026-04-11T08:00:00",
+    "price": 1250,
+    "vessel": "MS Stavangerfjord",
+    "availableSeats": 45,
+    "category": "Utenlands",
+    "requiresCabin": true
+  },
+  {
+    "id": "FL201",
+    "from": "Stavanger",
+    "to": "Hirtshals",
+    "departureTime": "2026-04-10T20:00:00",
+    "arrivalTime": "2026-04-11T08:00:00",
+    "price": 890,
+    "vessel": "MS Stavangerfjord",
+    "availableSeats": 80,
+    "category": "Utenlands"
+  },
+  {
+    "id": "FL301",
+    "from": "Hirtshals",
+    "to": "Kristiansand",
+    "departureTime": "2026-04-12T10:00:00",
+    "arrivalTime": "2026-04-12T12:15:00",
+    "price": 590,
+    "vessel": "Fjord FSTR",
+    "availableSeats": 200,
+    "category": "Utenlands"
+  },
+  {
+    "id": "FL103",
+    "from": "Stavanger",
+    "to": "Bergen",
+    "departureTime": "2026-04-13T07:00:00",
+    "arrivalTime": "2026-04-13T12:30:00",
+    "price": 450,
+    "vessel": "MS Bergensfjord",
+    "availableSeats": 150,
+    "category": "Innenriks"
+  }
+]
