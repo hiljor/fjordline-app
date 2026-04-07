@@ -22,8 +22,13 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+
 ## Mål og fokus
 Jeg ønsker å fokusere på å skape en app som er enkel å bruke. Jeg skaper derfor en app som følger tilgjengelighet, er rask og responsiv og har et enkelt og intuitivt grensesnitt. God SEO vil også være i bakhodet. Jeg velger disse målene framfor design gitt tidsbegrensningen.
+
+### Eksisterende applikasjon hos Fjord Line
+Deres eksisterende applikasjon er moderne, intuitiv og mobil-vennlig, og derfor prøver jeg å ta inspirasjon uten å kopiere den. Disse få tingene er det jeg selv ville forbedret/endret:
+- Søkeargumentet er ikke lagret ved refresh, og kan ikke deles via URL, som er noe jeg ville gjort for å gjøre det enklere å dele og gjenbruke søk.
 
 ## Prøblemløsning og valg
 
@@ -39,11 +44,11 @@ Har selv bare gjort alt i ett prosjekt, og selv om jeg gjerne vil lære å sette
 - /checkout: Siden for å fullføre bestilling gitt søkeparameterne
 - /api/departures: API rute for å hente avgangsinformasjon
 
-### Eksisterende applikasjon hos Fjord Line
-Deres eksisterende applikasjon er moderne, intuitiv og mobil-vennlig, og derfor prøver jeg å ta inspirasjon uten å kopiere den. Disse få tingene er det jeg selv ville forbedret/endret:
-- Søkeargumentet er ikke lagret ved refresh, og kan ikke deles via URL, som er noe jeg ville gjort for å gjøre det enklere å dele og gjenbruke søk.
 
-### Ekstra funksjonalitet jeg kanskje legger til:
+
+
+
+## Ekstra funksjonalitet jeg kanskje legger til:
 - Språkstøtte
 - Mobil-vennlighet
 - Dark mode
