@@ -30,13 +30,14 @@ Er mest kjent med app router, og valgte det også fordi Nextjs selv anbefaler de
 ### Backend
 Har selv bare gjort alt i ett prosjekt, og selv om jeg gjerne vil lære å sette opp separat REST-API er ikke det noe jeg tar meg tid til her, men kunne gjort med mer tid. Velger derfor å gjøre alt i ett prosjekt.
 
-### Brukervennlighet
-Jeg ønsker å fokusere på å skape en app som er enkel å bruke, og som har et rent og intuitivt design. Den skal også følge tilgjengelighetsstandarder.
+### Mål og fokus
+Jeg ønsker å fokusere på å skape en app som er enkel å bruke. Jeg skaper derfor en app som følger tilgjengelighet, er rask og responsiv og har et enkelt og intuitivt grensesnitt. God SEO vil også være i bakhodet.
 
 ### Ruting
-- /api/avganger: API rute for å hente avgangsinformasjon
 - /: Hovedsiden som viser søkefelt
-- /avganger: Siden som viser avgangsinformasjon basert på søkeargumentet
+- /departures: Siden som viser avgangsinformasjon basert på søkeargumentet
+- /checkout: Siden for å fullføre bestilling gitt søkeparameterne
+- /api/departures: API rute for å hente avgangsinformasjon
 
 ### Eksisterende applikasjon hos Fjord Line
 Deres eksisterende applikasjon er moderne, intuitiv og mobil-vennlig, og derfor prøver jeg å ta inspirasjon uten å kopiere den. Disse få tingene er det jeg selv ville forbedret/endret:
@@ -46,3 +47,4 @@ Deres eksisterende applikasjon er moderne, intuitiv og mobil-vennlig, og derfor 
 ### Ekstra funksjonalitet jeg kanskje legger til:
 - Språkstøtte
 - Mobil-vennlighet
+- Dark mode
