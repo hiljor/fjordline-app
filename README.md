@@ -52,6 +52,9 @@ Jeg bruker URL-søkeparametere for å lagre søkeargumentene, som gjør det muli
 ### Data
 Jeg valgte å bruke ID som inkludererer "IN" eller "UT" for å enkelt skille mellom innenriks og utenlands. Jeg satt "ticket" opp slik at ulike typer kan defineres og skilles mellom. Det er også en parameter for "cabinRequired" for å indikere at en avgang krever kabin, for å vise utvidingsmulighet for funksjonalitet.
 
+### Opphavsrettighet
+Jeg har brukt et bilde fra Fjordline jeg fant på Google av et av skipene deres, og realistisk sett trenger ikke dere annet enn egne bilder. Men i en ekte applikasjon ville jeg sjekket ordentlig opp i rettigheter og absolutt unngått å bruke det uten tillatelse.
+
 ## Ekstra funksjonalitet jeg kanskje legger til:
 - Språkstøtte
 - Dark mode
