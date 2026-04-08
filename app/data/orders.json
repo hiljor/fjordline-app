@@ -1,12 +1,14 @@
- [
-  {
-    "id": "ORD001",
-    "departureId": "IN101",
-    "customerName": "Ola Nordmann",
-    "customerEmail": "ola@nordmann.no",
-    "ticketType": "standard",
-    "quantity": 2,
-    "totalPrice": 450,
-    "orderDate": "2026-04-01T10:15:00",
-  }
- ]
+{
+  "orders": [
+    {
+      "id": "ORD001",
+      "departureId": "IN101",
+      "customerName": "Ola Nordmann",
+      "customerEmail": "ola@nordmann.no",
+      "ticketType": "standard",
+      "quantity": 2,
+      "totalPrice": 450,
+      "orderDate": "2026-04-01T10:15:00"
+    }
+  ]
+}
