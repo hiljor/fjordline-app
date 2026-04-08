@@ -1,58 +1,75 @@
 [
   {
-    "id": "FL101",
+    "id": "IN101",
     "from": "Bergen",
     "to": "Stavanger",
     "departureTime": "2026-04-10T13:30:00",
     "arrivalTime": "2026-04-10T19:00:00",
-    "price": 450,
+    "ticket": {
+      "club": 200,
+      "standard": 225,
+      "flex": 250
+    },
     "vessel": "MS Stavangerfjord",
-    "availableSeats": 120,
+    "availableTickets": 40,
     "category": "Innenriks"
   },
   {
-    "id": "FL102",
+    "id": "UT101",
     "from": "Bergen",
     "to": "Hirtshals",
     "departureTime": "2026-04-10T13:30:00",
     "arrivalTime": "2026-04-11T08:00:00",
-    "price": 1250,
+    "ticket": {
+      "club": 400,
+      "standard": 425,
+      "flex": 450
+    },
     "vessel": "MS Stavangerfjord",
-    "availableSeats": 45,
-    "category": "Utenlands",
+    "availableTickets": 1500,
     "requiresCabin": true
   },
   {
-    "id": "FL201",
+    "id": "UT102",
     "from": "Stavanger",
     "to": "Hirtshals",
     "departureTime": "2026-04-10T20:00:00",
     "arrivalTime": "2026-04-11T08:00:00",
-    "price": 890,
+    "ticket": {
+      "club": 300,
+      "standard": 325,
+      "flex": 350
+    },
     "vessel": "MS Stavangerfjord",
-    "availableSeats": 80,
+    "availableTickets": 0,
     "category": "Utenlands"
   },
   {
-    "id": "FL301",
+    "id": "UT103",
     "from": "Hirtshals",
     "to": "Kristiansand",
     "departureTime": "2026-04-12T10:00:00",
     "arrivalTime": "2026-04-12T12:15:00",
-    "price": 590,
+    "ticket": {
+      "club": 250,
+      "standard": 275,
+      "flex": 300
+    },
     "vessel": "Fjord FSTR",
-    "availableSeats": 200,
-    "category": "Utenlands"
+    "availableTickets": 500
   },
   {
-    "id": "FL103",
+    "id": "IN102",
     "from": "Stavanger",
     "to": "Bergen",
     "departureTime": "2026-04-13T07:00:00",
     "arrivalTime": "2026-04-13T12:30:00",
-    "price": 450,
+    "ticket": {
+      "club": 200,
+      "standard": 225,
+      "flex": 250
+    },
     "vessel": "MS Bergensfjord",
-    "availableSeats": 150,
-    "category": "Innenriks"
+    "availableTickets": 1500
   }
 ]
