@@ -4,9 +4,11 @@ export interface Departure {
   to: string;
   departureTime: string;
   arrivalTime: string;
-  price: number;
+  ticketTypes: {
+    type: string;
+    price: number;
+  }[];
   vessel: string;
-  availableSeats: number;
-  category: string;
-  requiresCabin?: boolean;
+  availableTickets: number;
+  requiresCabin: boolean;
 }

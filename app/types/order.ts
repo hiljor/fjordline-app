@@ -3,8 +3,10 @@ export interface Order {
   departureId: string;
   customerName: string;
   customerEmail: string;
-  ticketType: string;
-  quantity: number;
-  totalPrice: number;
+  tickets: {
+    type: string; // club, standard, flex etc
+    price: number; // price of ticket at time of order
+  }[];
+  amount: number;
   orderDate: string;
 }

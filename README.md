@@ -55,6 +55,9 @@ Jeg valgte å bruke ID som inkludererer "IN" eller "UT" for å enkelt skille mel
 ### Opphavsrettighet
 Jeg har brukt et bilde fra Fjordline jeg fant på Google av et av skipene deres, og realistisk sett trenger ikke dere annet enn egne bilder. Men i en ekte applikasjon ville jeg sjekket ordentlig opp i rettigheter og absolutt unngått å bruke det uten tillatelse.
 
+### Data filtering
+Siden jeg ikke har en ekte database eller API, har jeg valgt å gjøre all data filtering i frontend. Med en ekte backend ville jeg flyttet all logikk for datahåndtering dit, og bare returnert det som er relevant for søket til frontend.
+
 ## Ekstra funksjonalitet jeg kanskje legger til:
 - Språkstøtte
 - Dark mode

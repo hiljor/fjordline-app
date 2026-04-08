@@ -6,14 +6,14 @@
       "to": "Stavanger",
       "departureTime": "2026-04-10T13:30:00",
       "arrivalTime": "2026-04-10T19:00:00",
-      "ticket": {
-        "club": 200,
-        "standard": 225,
-        "flex": 250
-      },
+      "ticketTypes": [
+        {"type": "club", "price": 200},
+        {"type": "standard", "price": 225},
+        {"type": "flex", "price": 250}
+      ],
       "vessel": "MS Stavangerfjord",
       "availableTickets": 40,
-      "category": "Innenriks"
+      "requiresCabin": false
     },
     {
       "id": "UT101",
@@ -21,11 +21,11 @@
       "to": "Hirtshals",
       "departureTime": "2026-04-10T13:30:00",
       "arrivalTime": "2026-04-11T08:00:00",
-      "ticket": {
-        "club": 400,
-        "standard": 425,
-        "flex": 450
-      },
+      "ticketTypes": [
+        {"type": "club", "price": 400},
+        {"type": "standard", "price": 425},
+        {"type": "flex", "price": 450}
+      ],
       "vessel": "MS Stavangerfjord",
       "availableTickets": 1500,
       "requiresCabin": true
@@ -36,14 +36,14 @@
       "to": "Hirtshals",
       "departureTime": "2026-04-10T20:00:00",
       "arrivalTime": "2026-04-11T08:00:00",
-      "ticket": {
-        "club": 300,
-        "standard": 325,
-        "flex": 350
-      },
+      "ticketTypes": [
+        {"type": "club", "price": 300},
+        {"type": "standard", "price": 325},
+        {"type": "flex", "price": 350}
+      ],
       "vessel": "MS Stavangerfjord",
       "availableTickets": 0,
-      "category": "Utenlands"
+      "requiresCabin": false
     },
     {
       "id": "UT103",
@@ -51,13 +51,14 @@
       "to": "Kristiansand",
       "departureTime": "2026-04-12T10:00:00",
       "arrivalTime": "2026-04-12T12:15:00",
-      "ticket": {
-        "club": 250,
-        "standard": 275,
-        "flex": 300
-      },
+      "ticketTypes": [
+        {"type": "club", "price": 250},
+        {"type": "standard", "price": 275},
+        {"type": "flex", "price": 300}
+      ],
       "vessel": "Fjord FSTR",
-      "availableTickets": 500
+      "availableTickets": 500,
+      "requiresCabin": false
     },
     {
       "id": "IN102",
@@ -65,13 +66,14 @@
       "to": "Bergen",
       "departureTime": "2026-04-13T07:00:00",
       "arrivalTime": "2026-04-13T12:30:00",
-      "ticket": {
-        "club": 200,
-        "standard": 225,
-        "flex": 250
-      },
+      "ticketTypes": [
+        {"type": "club", "price": 200},
+        {"type": "standard", "price": 225},
+        {"type": "flex", "price": 250}
+      ],
       "vessel": "MS Bergensfjord",
-      "availableTickets": 1500
+      "availableTickets": 1500,
+      "requiresCabin": false
     }
   ]
 }
