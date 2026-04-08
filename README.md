@@ -52,11 +52,12 @@ Jeg bruker URL-søkeparametere for å lagre søkeargumentene, som gjør det muli
 ### Data
 Jeg valgte å bruke ID som inkludererer "IN" eller "UT" for å enkelt skille mellom innenriks og utenlands. Jeg satt "ticket" opp slik at ulike typer kan defineres og skilles mellom. Det er også en parameter for "cabinRequired" for å indikere at en avgang krever kabin, for å vise utvidingsmulighet for funksjonalitet.
 
+
 ### Opphavsrettighet
 Jeg har brukt et bilde fra Fjordline jeg fant på Google av et av skipene deres, og realistisk sett trenger ikke dere annet enn egne bilder. Men i en ekte applikasjon ville jeg sjekket ordentlig opp i rettigheter og absolutt unngått å bruke det uten tillatelse.
 
-### Data filtering
-Siden jeg ikke har en ekte database eller API, har jeg valgt å gjøre all data filtering i frontend. Med en ekte backend ville jeg flyttet all logikk for datahåndtering dit, og bare returnert det som er relevant for søket til frontend.
+### Data fetching
+Jeg simulerer data fetching ved å ha en lib/db.ts som leser data fra en lokal JSON-fil. Jeg gjør dette for at det senere skal være enkelt å bytte ut med en ekte database uten å endre større deler av koden.
 
 ## Ekstra funksjonalitet jeg kanskje legger til:
 - Språkstøtte
