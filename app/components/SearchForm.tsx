@@ -2,12 +2,16 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+/**
+ * Search form for finding departures.
+ * @returns 
+ */
 export default function SearchForm() {
   const [isRoundTrip, setIsRoundTrip] = useState(false);
   const router = useRouter();
 
   async function handleSearch(formData: FormData) {
-    // Her henter vi verdiene fra skjemaet
+
     const from = formData.get("from");
     const to = formData.get("to");
     const departureDate = formData.get("departureDate");
@@ -19,14 +23,12 @@ export default function SearchForm() {
       url += `&returnDate=${returnDate}`;
     }
 
-    // Siden vi er i en Client Component ("use client"), 
-    // bruker vi router.push i stedet for redirect()
     router.push(url);
   }
 
   return (
     <div className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 border border-slate-100">
-      {/* Tab for reisetype */}
+      {/* Set one-way or round trip */}
       <div className="flex gap-4 mb-6">
         <button 
           onClick={() => setIsRoundTrip(false)}
@@ -43,7 +45,7 @@ export default function SearchForm() {
       </div>
 
       <form action={handleSearch} className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {/* Fra */}
+        {/* From */}
         <div className="flex flex-col gap-1">
           <label className="text-xs font-bold text-slate-500 uppercase ml-1">Fra</label>
           <select name="from" className="p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand outline-none" required>
@@ -53,7 +55,7 @@ export default function SearchForm() {
           </select>
         </div>
 
-        {/* Til */}
+        {/* To */}
         <div className="flex flex-col gap-1">
           <label className="text-xs font-bold text-slate-500 uppercase ml-1">Til</label>
           <select name="to" className="p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand outline-none" required>
@@ -63,7 +65,7 @@ export default function SearchForm() {
           </select>
         </div>
 
-        {/* Utreise Dato */}
+        {/* Departure date */}
         <div className="flex flex-col gap-1">
           <label className="text-xs font-bold text-slate-500 uppercase ml-1">Utreise</label>
           <input 
@@ -74,7 +76,7 @@ export default function SearchForm() {
           />
         </div>
 
-        {/* Retur Dato (valgfri) */}
+        {/* Return date */}
         <div className={`flex flex-col gap-1 transition-opacity ${!isRoundTrip ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}>
           <label className="text-xs font-bold text-slate-500 uppercase ml-1">Retur</label>
           <input 
@@ -85,7 +87,7 @@ export default function SearchForm() {
           />
         </div>
 
-        {/* Søkeknapp - Full bredde på mobil, i grid på desktop */}
+        {/* Search button */}
         <div className="md:col-span-4 mt-2">
           <button 
             type="submit" 
