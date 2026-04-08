@@ -43,6 +43,9 @@ Har selv bare gjort alt i ett prosjekt, og selv om jeg gjerne vil lære å sette
 - /checkout: Siden for å fullføre bestilling gitt søkeparameterne
 - /api/departures: API rute for å hente avgangsinformasjon basert på søkeargumentet
 
+### Imports
+Jeg opplevde problemere med å importere ved hjelp av "@/seksjon/fil", og valgte derfor å bruke relative imports. Jeg ville helst fikset dette problemet gitt at det gjør det enklere å flytte filer, men fikser ikke det nå.
+
 ### Søkeparametere
 Jeg bruker URL-søkeparametere for å lagre søkeargumentene, som gjør det mulig å enkelt dele og gjenbruke søk.
 
