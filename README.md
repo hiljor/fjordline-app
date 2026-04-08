@@ -24,11 +24,10 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 
 ## Mål og fokus
-Jeg ønsker å fokusere på å skape en app som er enkel å bruke. Jeg skaper derfor en app som følger tilgjengelighet, er rask og responsiv og har et enkelt og intuitivt grensesnitt. God SEO vil også være i bakhodet. Jeg velger disse målene framfor design gitt tidsbegrensningen.
+Jeg ønsker å fokusere på å skape en app som er enkel å bruke. Jeg skaper derfor en app som følger tilgjengelighet, er rask og responsiv og har et enkelt og intuitivt grensesnitt. God SEO vil også være i bakhodet.
 
 ### Eksisterende applikasjon hos Fjord Line
-Deres eksisterende applikasjon er moderne, intuitiv og mobil-vennlig, og derfor prøver jeg å ta inspirasjon uten å kopiere den. Disse få tingene er det jeg selv ville forbedret/endret:
-- Søkeargumentet er ikke lagret ved refresh, og kan ikke deles via URL, som er noe jeg ville gjort for å gjøre det enklere å dele og gjenbruke søk.
+Deres eksisterende applikasjon er moderne, intuitiv og mobil-vennlig, og derfor prøver jeg å ta inspirasjon uten å kopiere den. Det ene jeg merker meg er at søkeargumentet ikke er lagret i URL, og at det ikke er mulig å dele søk. Det er noe jeg vil gjøre annerledes for å gjøre det enklere å dele og gjenbruke søk, selv om det også er gunstig å bruke en session av andre grunner.
 
 ## Prøblemløsning og valg
 
@@ -42,12 +41,14 @@ Har selv bare gjort alt i ett prosjekt, og selv om jeg gjerne vil lære å sette
 - /: Hovedsiden som viser søkefelt
 - /departures: Siden som viser avgangsinformasjon basert på søkeargumentet
 - /checkout: Siden for å fullføre bestilling gitt søkeparameterne
-- /api/departures: API rute for å hente avgangsinformasjon
+- /api/departures: API rute for å hente avgangsinformasjon basert på søkeargumentet
 
-## Funksjonalitet og valg
-- For å unngå søkeparametere på hovedsiden (og dermed litt rotete hovedURL), valgte jeg bort å lagre søkeargument ved refresh. For å gjøre det mulig å dele søk, bruker jeg URL-søkeargumenter på avgangssiden, og sender disse videre til checkout-siden.
+### Søkeparametere
+Jeg bruker URL-søkeparametere for å lagre søkeargumentene, som gjør det mulig å enkelt dele og gjenbruke søk.
+
+### Data
+Jeg valgte å bruke ID som inkludererer "IN" eller "UT" for å enkelt skille mellom innenriks og utenlands. Jeg satt "ticket" opp slik at ulike typer kan defineres og skilles mellom. Det er også en parameter for "cabinRequired" for å indikere at en avgang krever kabin, for å vise utvidingsmulighet for funksjonalitet.
 
 ## Ekstra funksjonalitet jeg kanskje legger til:
 - Språkstøtte
-- Mobil-vennlighet
 - Dark mode
