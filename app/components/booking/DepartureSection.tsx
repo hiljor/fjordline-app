@@ -7,9 +7,13 @@ import { Check, Ship, Moon, ArrowRight, Info, ChevronLeft, ChevronRight, Calenda
 import { motion } from "motion/react";
 
 export default function DepartureSection({ outboundItems, returnItems, outboundDate, returnDate }: any) {
+  
   const { register, watch, setValue } = useFormContext();
   const formatTime = (dateStr: string) => 
     new Date(dateStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  const selectedOutbound = watch("outboundCabin");
+  const selectedReturn = watch("returnCabin");
 
   return (
     <div className="space-y-12 pb-10">
@@ -60,6 +64,10 @@ export default function DepartureSection({ outboundItems, returnItems, outboundD
 function TicketCarousel({ tickets, departureId, fieldName, register, setValue, watch }: any) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // 1. Determine if a ticket has been picked for this journey leg
+  const selectedTicketType = watch(fieldName);
+  const anySelected = !!selectedTicketType;
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
@@ -73,7 +81,7 @@ function TicketCarousel({ tickets, departureId, fieldName, register, setValue, w
 
   return (
     <div className="relative group">
-      {/* Navigation Arrows - Only visible on mobile/small screens or hover */}
+      {/* Navigation Arrows */}
       <button 
         type="button"
         onClick={() => scroll('left')}
@@ -106,7 +114,9 @@ function TicketCarousel({ tickets, departureId, fieldName, register, setValue, w
               fieldName={fieldName}
               register={register}
               setValue={setValue}
-              isSelected={watch(fieldName) === ticket.type}
+              // 2. Pass selection states to the card
+              isSelected={selectedTicketType === ticket.type}
+              anySelected={anySelected} 
             />
           </div>
         ))}
@@ -115,7 +125,7 @@ function TicketCarousel({ tickets, departureId, fieldName, register, setValue, w
   );
 }
 
-function TicketCard({ ticket, departureId, fieldName, register, isSelected, setValue }: any) {
+function TicketCard({ ticket, departureId, fieldName, register, isSelected, anySelected, setValue }: any) {
   const handleClick = () => {
     setValue(fieldName, ticket.type, { shouldValidate: true });
     const idField = fieldName.includes("outbound") ? "outboundDepartureId" : "returnDepartureId";
@@ -123,20 +133,33 @@ function TicketCard({ ticket, departureId, fieldName, register, isSelected, setV
   };
 
   const isFlex = ticket.type.toLowerCase().includes("flex");
+  const isDimmed = anySelected && !isSelected;
 
   return (
     <motion.div 
       onClick={handleClick}
       whileTap={{ scale: 0.98 }}
+      animate={{ 
+        // 3. Apply the "Faded & Gray" effect
+        opacity: isDimmed ? 0.4 : 1,
+        filter: isDimmed ? "grayscale(100%) brightness(0.9)" : "grayscale(0%) brightness(1)",
+        scale: isDimmed ? 0.97 : 1,
+        borderColor: isSelected ? "#0066FF" : "#f1f5f9" 
+      }}
+      transition={{ duration: 0.2, ease: "circOut" }}
       className={`
-        relative flex flex-col p-4 rounded-[1.5rem] cursor-pointer border-2 transition-all h-full
-        ${isSelected ? 'bg-white border-brand ring-4 ring-brand/5 shadow-md' : 'bg-white border-slate-100 shadow-sm'}
+        relative flex flex-col p-4 rounded-[1.5rem] cursor-pointer border-2 h-full transition-shadow
+        ${isSelected ? 'bg-white shadow-lg ring-4 ring-brand/5' : 'bg-white shadow-sm'}
       `}
     >
+      <input type="radio" {...register(fieldName)} value={ticket.type} className="sr-only" />
+      
       <div className="flex justify-between items-start mb-2">
         <div>
           <h3 className="font-black text-[10px] text-slate-400 uppercase tracking-widest">{ticket.type}</h3>
-          <div className="text-2xl font-black text-slate-900">{ticket.price},-</div>
+          <div className={`text-xl font-black transition-colors ${isSelected ? 'text-brand' : 'text-slate-900'}`}>
+            {ticket.price},-
+          </div>
         </div>
         <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
           isSelected ? 'bg-brand border-brand text-white' : 'border-slate-200 text-transparent'
@@ -147,11 +170,12 @@ function TicketCard({ ticket, departureId, fieldName, register, isSelected, setV
 
       <div className="space-y-1 pt-3 border-t border-slate-50">
         <div className="flex items-center gap-2 text-[11px] font-bold text-slate-600">
-          <Check size={12} className="text-emerald-500" /> Standard sete
+          <Check size={12} className={isSelected ? "text-emerald-500" : "text-slate-300"} /> 
+          <span>Standard sete</span>
         </div>
         <div className={`flex items-center gap-2 text-[11px] font-bold ${isFlex ? 'text-slate-600' : 'text-slate-300'}`}>
-          {isFlex ? <Check size={12} className="text-emerald-500" /> : <Info size={12} />}
-          {isFlex ? "Full fleks" : "Ingen ref."}
+          {isFlex ? <Check size={12} className={isSelected ? "text-emerald-500" : "text-slate-300"} /> : <Info size={12} />}
+          <span>{isFlex ? "Full fleks" : "Ingen ref."}</span>
         </div>
       </div>
     </motion.div>

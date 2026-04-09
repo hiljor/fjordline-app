@@ -14,8 +14,20 @@ export default async function DeparturesPage({
 }) {
   const params = await searchParams;
 
-  // 1. Fetch data on the server for speed and SEO
+  // 1. Fetch data on the server
   const { departures, returns } = await getFilteredDepartures(params);
+
+  let hasError = true;
+  let errorText = "";
+  if (departures.length === 0) {
+    errorText = "Vi har dessverre ingen avganger for den valgte datoen.";
+  } else if (params.returnDate && returns.length === 0) {
+    errorText = "Vi har dessverre ingen returer for den valgte returdatoen.";
+  } else if (departures.length === 0 && params.returnDate && returns.length === 0) {
+    errorText = "Vi har dessverre ingen avganger eller returer for de valgte datoene.";
+  } else {
+    hasError = false;
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 pt-24 pb-24">
@@ -23,9 +35,13 @@ export default async function DeparturesPage({
         {/* Keep the collapsible search for quick changes */}
         <SearchForm collapsible={true} />
 
-        {/* Pass the data to the Client Component "Wizard" 
-          which will handle React Hook Form state 
-        */}
+        {/* If there is no data, we could show an error or empty state here */}
+        { hasError ? (
+          <div className="bg-red-100 text-brand p-4 rounded mb-6">
+            <p>{errorText}</p>
+          </div>
+        )
+        : (
         <BookingWizard
           outboundItems={departures}
           returnItems={returns}
@@ -33,6 +49,7 @@ export default async function DeparturesPage({
           returnDate={params.returnDate}
           isRoundTripRequested={!!params.returnDate}
         />
+        )}
       </div>
     </main>
   );
