@@ -10,6 +10,11 @@ interface EditSearchProps {
   returnDate?: string;
 }
 
+/**
+ * DEPRECATED: This component is no longer used, and is replaced by SearchForm with collapsible functionality.
+ * @param param0
+ * @returns 
+ */
 export default function EditSearch({ from, to, date, returnDate}: EditSearchProps) {
   const [isEditing, setIsEditing] = useState(false);
 

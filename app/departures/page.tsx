@@ -1,9 +1,8 @@
 import type { Departure } from '../types/departure';
 import { getFilteredDepartures } from '../lib/db';
-import EditSearch from '../components/EditSearch';
+import SearchForm from '../components/SearchForm';
 import { Moon } from 'lucide-react';
-
-import Link from 'next/link';
+import { Suspense } from 'react';
 
 export default async function DeparturesPage({
   searchParams,
@@ -24,7 +23,7 @@ export default async function DeparturesPage({
       <div className="container mx-auto px-4 max-w-4xl">
         
         {/* Søke-info Bar */}
-        <EditSearch from={from} to={to} date={date} />
+        <SearchForm  collapsible={true} />
 
         {/* UTREISE SEKSJON */}
         <div className="space-y-6">

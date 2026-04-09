@@ -3,20 +3,33 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function SearchForm() {
+interface SearchFormProps {
+  collapsible?: boolean;
+}
+
+/**
+ * A flexible search form component that can either be a full form or a collapsible header depending on the "collapsible" prop.
+ * When collapsible is true, it shows a summary of the current search and an "Edit Search" button. Clicking the button expands the full form.
+ * When collapsible is false (default), it always shows the full form.
+ * @param param0 
+ * @returns 
+ */
+export default function SearchForm({ collapsible = false }: SearchFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // 1. Hent nåværende verdier fra URL
+  // 1. Manage the expanded/collapsed state
+  // If not collapsible, we default to "editing" mode (true)
+  const [isEditing, setIsEditing] = useState(!collapsible);
+
+  // 2. Sync values from URL
   const urlFrom = searchParams.get("from") || "";
   const urlTo = searchParams.get("to") || "";
   const urlDate = searchParams.get("date") || "";
   const urlReturnDate = searchParams.get("returnDate") || "";
 
-  // 2. Synkroniser "Tur/Retur"-state med URL-en
   const [isRoundTrip, setIsRoundTrip] = useState(!!urlReturnDate);
 
-  // Oppdater state hvis URL-en endres (f.eks. ved "tilbake"-knapp)
   useEffect(() => {
     setIsRoundTrip(!!urlReturnDate);
   }, [urlReturnDate]);
@@ -34,11 +47,54 @@ export default function SearchForm() {
     }
 
     router.push(url);
+
+    // Close the form if it's in collapsible mode
+    if (collapsible) {
+      setIsEditing(false);
+    }
   }
 
+  // --- VIEW A: Collapsed Header (Summary) ---
+  if (collapsible && !isEditing) {
+    return (
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 mb-8 overflow-hidden transition-all duration-300 p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+          <h1 className="text-2xl font-black text-slate-900 flex items-center gap-2">
+            {urlFrom} <span className="text-brand">→</span> {urlTo}
+          </h1>
+          <p className="text-slate-500 font-medium">{urlDate}</p>
+        </div>
+        <button
+          onClick={() => setIsEditing(true)}
+          className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-2 rounded-full font-bold transition-all text-sm"
+        >
+          Endre søk
+        </button>
+      </div>
+    );
+  }
+
+  // --- VIEW B: The Full Form ---
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 border border-slate-100">
-      {/* Tab for reisetype */}
+    <div className={`w-full mx-auto bg-white rounded-2xl border border-slate-100 transition-all duration-300 
+      ${collapsible 
+        ? 'p-6 bg-slate-50 animate-in fade-in slide-in-from-top-4 mb-8 shadow-sm' 
+        : 'max-w-4xl shadow-xl p-6'}`}>
+      
+      {/* Header for editing mode */}
+      {collapsible && (
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="font-bold text-slate-800">Oppdater ditt søk</h2>
+          <button 
+            onClick={() => setIsEditing(false)}
+            className="text-slate-400 hover:text-slate-600 text-sm font-medium"
+          >
+            Avbryt ✕
+          </button>
+        </div>
+      )}
+
+      {/* Tabs */}
       <div className="flex gap-4 mb-6">
         <button 
           type="button"
@@ -57,12 +113,12 @@ export default function SearchForm() {
       </div>
 
       <form action={handleSearch} className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {/* Fra */}
+        {/* From */}
         <div className="flex flex-col gap-1">
           <label className="text-xs font-bold text-slate-500 uppercase ml-1">Fra</label>
           <select 
             name="from" 
-            key={`from-${urlFrom}`} // Tvinger re-render når URL endres
+            key={`from-${urlFrom}`} 
             defaultValue={urlFrom}
             className="p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand outline-none" 
             required
@@ -74,12 +130,12 @@ export default function SearchForm() {
           </select>
         </div>
 
-        {/* Til */}
+        {/* To */}
         <div className="flex flex-col gap-1">
           <label className="text-xs font-bold text-slate-500 uppercase ml-1">Til</label>
           <select 
             name="to" 
-            key={`to-${urlTo}`} // Tvinger re-render når URL endres
+            key={`to-${urlTo}`} 
             defaultValue={urlTo}
             className="p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand outline-none" 
             required
@@ -91,7 +147,7 @@ export default function SearchForm() {
           </select>
         </div>
 
-        {/* Utreise Dato */}
+        {/* Date */}
         <div className="flex flex-col gap-1">
           <label className="text-xs font-bold text-slate-500 uppercase ml-1">Utreise</label>
           <input 
@@ -103,7 +159,7 @@ export default function SearchForm() {
           />
         </div>
 
-        {/* Retur Dato */}
+        {/* Return Date */}
         <div className={`flex flex-col gap-1 transition-opacity ${!isRoundTrip ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}>
           <label className="text-xs font-bold text-slate-500 uppercase ml-1">Retur</label>
           <input 
@@ -120,7 +176,7 @@ export default function SearchForm() {
             type="submit" 
             className="w-full bg-brand hover:bg-brand-dark text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-brand/20 active:scale-[0.98]"
           >
-            Finn avganger
+            {collapsible ? "Oppdater søk" : "Finn avganger"}
           </button>
         </div>
       </form>
