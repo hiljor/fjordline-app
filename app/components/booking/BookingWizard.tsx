@@ -77,7 +77,7 @@ export default function BookingWizard({
                     isActive
                       ? "bg-brand text-white scale-110 shadow-lg shadow-brand/20"
                       : isCompleted
-                        ? "bg-emerald-500 text-white"
+                        ? "bg-brand text-white"
                         : "bg-slate-100 text-slate-400"
                   }`}
                 >
