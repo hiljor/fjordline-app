@@ -1,7 +1,28 @@
 import { getFilteredDepartures } from '../lib/db';
 import SearchForm from '../components/SearchForm';
-import DepartureList from '../components/departures/DepartureList'; // Import the new wrapper
+import DepartureList from '../components/departures/DepartureList';
+import { DepartureListSkeleton } from '../components/departures/DepartureSkeleton';
 import { Suspense } from 'react';
+
+/**
+ * Results component that fetches data.
+ * We now only return the list itself, not the headers.
+ */
+async function DepartureResults({ params, type }: { params: any, type: 'outbound' | 'return' }) {
+  const { departures, returns } = await getFilteredDepartures(params);
+  
+  const items = type === 'outbound' ? departures : returns;
+
+  if (items.length === 0) {
+    return (
+      <div className="p-12 text-center bg-white rounded-2xl border-2 border-dashed border-slate-200 text-slate-400">
+        Ingen tilgjengelige avganger funnet for denne reisen.
+      </div>
+    );
+  }
+
+  return <DepartureList items={items} accentColor={type === 'return' ? 'emerald' : 'brand'} />;
+}
 
 export default async function DeparturesPage({
   searchParams,
@@ -9,7 +30,6 @@ export default async function DeparturesPage({
   searchParams: Promise<{ from: string; to: string; date: string; returnDate?: string }>;
 }) {
   const params = await searchParams;
-  const { departures, returns } = await getFilteredDepartures(params);
   const { from, to, returnDate } = params;
 
   return (
@@ -20,38 +40,31 @@ export default async function DeparturesPage({
 
         {/* UTREISE SEKSJON */}
         <div className="space-y-6">
+          {/* Static Header: Always visible */}
           <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
             <span className="w-2 h-6 bg-brand rounded-full" />
             Velg utreise
           </h2>
           
-          {departures.length > 0 ? (
-            /* Use the new component here */
-            <DepartureList items={departures} />
-          ) : (
-            <div className="p-12 text-center bg-white rounded-2xl border-2 border-dashed border-slate-200 text-slate-400">
-              Ingen tilgjengelige avganger funnet for denne datoen.
-            </div>
-          )}
-
-          {/* RETUR SEKSJON */}
-          {returnDate && (
-            <div className="mt-12 space-y-6">
-              <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-                <span className="w-2 h-6 bg-brand rounded-full" />
-                Velg hjemreise ({to} → {from})
-              </h2>
-              {returns.length > 0 ? (
-                /* And here for returns */
-                <DepartureList items={returns} accentColor="brand" />
-              ) : (
-                <div className="p-12 text-center bg-white rounded-2xl border-2 border-dashed border-slate-200 text-slate-400">
-                  Ingen returreiser funnet for {returnDate}.
-                </div>
-              )}
-            </div>
-          )}
+          <Suspense fallback={<DepartureListSkeleton />}>
+            <DepartureResults params={params} type="outbound" />
+          </Suspense>
         </div>
+
+        {/* RETUR SEKSJON */}
+        {returnDate && (
+          <div className="mt-12 space-y-6">
+            {/* Static Header: Always visible */}
+            <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+              <span className="w-2 h-6 bg-emerald-500 rounded-full" />
+              Velg hjemreise ({to} → {from})
+            </h2>
+            
+            <Suspense fallback={<DepartureListSkeleton />}>
+              <DepartureResults params={params} type="return" />
+            </Suspense>
+          </div>
+        )}
       </div>
     </main>
   );

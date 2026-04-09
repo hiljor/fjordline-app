@@ -33,5 +33,8 @@ export async function getFilteredDepartures(filters: { from: string; to: string;
     });
   }
   
+  // simulate server latency
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
   return { departures: filteredDepartures, returns: filteredReturns };
 }
