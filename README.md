@@ -64,6 +64,14 @@ Jeg laget først et oppsett med en liste over DepartureCards, slik man har for f
 Tidligere visning:
 ![Tidligere valg av avganger](log/image.png)
 
+Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av Fjordline sin booking, men simplifisert, gjort for å være oversiktelig og mobilvennlig, samt tilgjengelig.
+
+## TODO:
+- Sikre hva som skjer når det ikke er noen avganger tilgjengelig for søket
+- Oppsumeringskomponent for å vise en oppsummering av søket og valgte avganger i checkout
+- Wrap avganger i Suspense for å vise skeletons ved lasting
+- Bedre håndtering av feil ved data fetching
+
 ## Ideer for videre utvikling
 - Bilder som indikerer byene, plassert i headeren på /departures på hver sin side
 - 
