@@ -68,9 +68,8 @@ Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av 
 
 ## TODO:
 - Sikre hva som skjer når det ikke er noen avganger tilgjengelig for søket
-- Oppsumeringskomponent for å vise en oppsummering av søket og valgte avganger i checkout
 - Wrap avganger i Suspense for å vise skeletons ved lasting
-- Bedre håndtering av feil ved data fetching
+- Rydd i håndtering av feil ved data fetching
 
 ## Ideer for videre utvikling
 - Bilder som indikerer byene, plassert i headeren på /departures på hver sin side
