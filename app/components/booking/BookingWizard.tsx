@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import DepartureSection from "./DepartureSection";
+import SummarySection from "./SummarySection";
 import {
   AlertCircle,
   CalendarX,
@@ -17,7 +18,7 @@ export default function BookingWizard({
   returnItems,
   isRoundTripRequested,
   outboundDate,
-  returnDate
+  returnDate,
 }: any) {
   const [step, setStep] = useState(1);
 
@@ -71,12 +72,20 @@ export default function BookingWizard({
             const Icon = icons[i];
             return (
               <div key={label} className="flex items-center gap-3">
-                <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
-                    isActive ? "bg-brand text-white scale-110 shadow-lg shadow-brand/20" : isCompleted ? "bg-emerald-500 text-white" : "bg-slate-100 text-slate-400"
-                }`}>
+                <span
+                  className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
+                    isActive
+                      ? "bg-brand text-white scale-110 shadow-lg shadow-brand/20"
+                      : isCompleted
+                        ? "bg-emerald-500 text-white"
+                        : "bg-slate-100 text-slate-400"
+                  }`}
+                >
                   <Icon size={16} />
                 </span>
-                <span className={`hidden md:block font-bold text-sm ${isActive ? "text-slate-800" : "text-slate-400"}`}>
+                <span
+                  className={`hidden md:block font-bold text-sm ${isActive ? "text-slate-800" : "text-slate-400"}`}
+                >
                   {label}
                 </span>
               </div>
@@ -95,7 +104,9 @@ export default function BookingWizard({
                 <CalendarX size={40} />
               </div>
               <div className="max-w-md mx-auto">
-                <h2 className="text-2xl font-black text-slate-900 mb-2">Ingen ledige avganger</h2>
+                <h2 className="text-2xl font-black text-slate-900 mb-2">
+                  Ingen ledige avganger
+                </h2>
                 <p className="text-slate-500 leading-relaxed">
                   {!hasOutbound
                     ? "Vi fant dessverre ingen avganger på din valgte utreisedato."
@@ -127,12 +138,11 @@ export default function BookingWizard({
               )}
 
               {step === 4 && (
-                <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                  <h2 className="text-2xl font-black mb-4">Oppsummering</h2>
-                  <pre className="bg-slate-50 p-4 rounded-xl text-xs overflow-auto">
-                    {JSON.stringify(watch(), null, 2)}
-                  </pre>
-                </div>
+                <SummarySection
+                  watch={watch}
+                  outboundItems={outboundItems}
+                  returnItems={returnItems}
+                />
               )}
             </>
           )}

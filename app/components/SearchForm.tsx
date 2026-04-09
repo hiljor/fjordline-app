@@ -63,68 +63,59 @@ export default function SearchForm({ collapsible = false }: SearchFormProps) {
 
   // --- VIEW A: Collapsed Header (Summary) ---
   if (collapsible && !isEditing) {
-    return (
-        <div className="relative p-6 md:p-10">
-          
-          <div className="flex items-start justify-between">
-            
-            {/* COLUMN LEFT: DEPARTURE */}
-            <div className="flex flex-col items-start gap-4 flex-1">
-              <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-[1.8rem] md:rounded-[2.2rem] overflow-hidden shadow-lg border-2 border-white">
-                <img 
-                  src={getCityImage(urlFrom)} 
-                  alt={urlFrom}
-                  className="w-full h-full object-cover"
-                  onError={(e) => (e.currentTarget.src = "/images/placeholder.webp")}
-                />
-              </div>
-              <div className="space-y-1">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Avreise</p>
-                <p className="text-xl md:text-2xl font-black text-slate-900 leading-none mb-2">{urlFrom}</p>
-              </div>
-            </div>
+  return (
+    <button 
+      onClick={() => setIsEditing(true)}
+      className="w-full text-left group relative p-6 md:p-10 transition-all hover:bg-slate-50/50"
+    >
+      {/* Subtle "Edit" hint that appears on hover/tap */}
+      <div className="absolute top-4 right-6 flex items-center gap-2 text-slate-400 group-hover:text-brand transition-colors">
+        <span className="text-[10px] font-black uppercase tracking-widest">Endre</span>
+        <Search size={14} />
+      </div>
 
-            {/* CENTER PILLAR: THE BUTTON */}
-            <div className="flex flex-col items-center justify-center pt-6 md:pt-10 px-2 min-w-[80px]">
-              {/* Decorative vertical line */}
-              <div className="w-px h-8 bg-slate-100 mb-2 hidden md:block" />
-              
-              <button 
-                onClick={() => setIsEditing(true)}
-                className="group relative flex flex-col items-center gap-2"
-              >
-                {/* Circular Action Button */}
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-white border border-slate-200 rounded-full flex items-center justify-center shadow-sm group-hover:border-brand group-hover:text-brand transition-all group-active:scale-90">
-                  <Search size={18} className="group-hover:scale-110 transition-transform" />
-                </div>
-                <span className="text-xl font-black text-slate-400 uppercase tracking-tighter group-hover:text-brand transition-colors">
-                  Endre
-                </span>
-              </button>
-
-              <div className="w-px h-8 bg-slate-100 mt-2 hidden md:block" />
-            </div>
-
-            {/* COLUMN RIGHT: DESTINATION */}
-            <div className="flex flex-col items-end gap-4 flex-1 text-right">
-              <div className="relative w-20 h-20 md:w-28 md:h-28 rounded-[1.8rem] md:rounded-[2.2rem] overflow-hidden shadow-lg border-2 border-white">
-                <img 
-                  src={getCityImage(urlTo)} 
-                  alt={urlTo}
-                  className="w-full h-full object-cover"
-                  onError={(e) => (e.currentTarget.src = "/images/placeholder.webp")}
-                />
-              </div>
-              <div className="space-y-1 flex flex-col items-end">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Destinasjon</p>
-                <p className="text-xl md:text-2xl font-black text-slate-900 leading-none mb-2">{urlTo}</p>
-              
-              </div>
-            </div>
-
+      <div className="flex items-center justify-between">
+        
+        {/* LEFT: FROM */}
+        <div className="flex flex-col items-start gap-4 flex-1">
+          <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-[1.8rem] md:rounded-[2.2rem] overflow-hidden shadow-md border-2 border-white group-hover:border-brand/20 transition-all">
+            <img 
+              src={getCityImage(urlFrom)} 
+              alt={urlFrom}
+              className="w-full h-full object-cover"
+              onError={(e) => (e.currentTarget.src = "/images/placeholder.webp")}
+            />
+          </div>
+          <div className="space-y-1">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Avreise</p>
+            <p className="text-xl md:text-2xl font-black text-slate-900 leading-none">{urlFrom}</p>
           </div>
         </div>
-    );
+
+        {/* MIDDLE: DECORATIVE ARROW */}
+        <div className="flex-shrink-0 px-4 flex flex-col items-center gap-1">
+          <ArrowRightLeft className="text-slate-200 group-hover:text-brand transition-colors" size={24} />
+        </div>
+
+        {/* RIGHT: TO */}
+        <div className="flex flex-col items-end gap-4 flex-1 text-right">
+          <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-[1.8rem] md:rounded-[2.2rem] overflow-hidden shadow-md border-2 border-white group-hover:border-brand/20 transition-all">
+            <img 
+              src={getCityImage(urlTo)} 
+              alt={urlTo}
+              className="w-full h-full object-cover"
+              onError={(e) => (e.currentTarget.src = "/images/placeholder.webp")}
+            />
+          </div>
+          <div className="space-y-1">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Destinasjon</p>
+            <p className="text-xl md:text-2xl font-black text-slate-900 leading-none">{urlTo}</p>
+          </div>
+        </div>
+
+      </div>
+    </button>
+  );
   }
 
   // --- VIEW B: The Full Form ---
