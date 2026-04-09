@@ -1,27 +1,31 @@
-import { useState } from "react";
+import { getFilteredDepartures } from '../lib/db';
+import SearchForm from '../components/SearchForm';
+import BookingWizard from '../components/booking/BookingWizard';
 
-// Simplified logic for the new multi-step flow
-export default function BookPage() {
-  const [step, setStep] = useState(1);
+export default async function DeparturesPage({ 
+  searchParams 
+}: { 
+  searchParams: Promise<{ from: string; to: string; date: string; returnDate?: string }> 
+}) {
+  const params = await searchParams;
+  
+  // 1. Fetch data on the server for speed and SEO
+  const { departures, returns } = await getFilteredDepartures(params);
 
   return (
-    <main>
-      <div className="stepper-indicator flex gap-4 mb-8">
-        {['Avgang', 'Lugar', 'Kjøretøy', 'Utsjekk'].map((label, i) => (
-          <div key={i} className={`step ${step === i + 1 ? 'text-brand font-bold' : 'text-slate-400'}`}>
-            {i + 1}. {label}
-          </div>
-        ))}
-      </div>
+    <main className="min-h-screen bg-slate-50 pt-24 pb-24">
+      <div className="container mx-auto px-4 max-w-4xl">
+        {/* Keep the collapsible search for quick changes */}
+        <SearchForm collapsible={true} />
 
-      <form action="/checkout" method="POST">
-        {step === 1 && <DepartureSection onNext={() => setStep(2)} />}
-        {step === 2 && <AccommodationSection onNext={() => setStep(3)} onBack={() => setStep(1)} />}
-        {step === 3 && <VehicleSection onNext={() => setStep(4)} onBack={() => setStep(2)} />}
-        {step === 4 && <SummarySection onBack={() => setStep(3)} />}
-        
-        {/* Sticky footer only shows "Next" logic or "Complete" */}
-      </form>
+        {/* Pass the data to the Client Component "Wizard" 
+          which will handle React Hook Form state 
+        */}
+        <BookingWizard 
+          outboundItems={departures} 
+          returnItems={returns} 
+        />
+      </div>
     </main>
   );
 }

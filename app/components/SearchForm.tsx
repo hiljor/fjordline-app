@@ -40,7 +40,7 @@ export default function SearchForm({ collapsible = false }: SearchFormProps) {
     const departureDate = formData.get("departureDate");
     const returnDate = formData.get("returnDate");
 
-    let url = `/departures?from=${from}&to=${to}&date=${departureDate}`;
+    let url = `/booking?from=${from}&to=${to}&date=${departureDate}`;
     
     if (isRoundTrip && returnDate) {
       url += `&returnDate=${returnDate}`;
