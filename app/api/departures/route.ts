@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import type { Departure } from "../../types/departure";
+import type { Departure } from "@/app/types/departure";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
