@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { Departure } from "@/app/types/departure";
-import { Check, Ship, Moon, ArrowRight, Info, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import { Check, Ship, Moon, Info, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import { motion } from "motion/react";
 
 export default function DepartureSection({ outboundItems = [], returnItems = [], outboundDate, returnDate }: any) {
