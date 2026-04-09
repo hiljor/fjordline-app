@@ -59,6 +59,11 @@ Jeg har brukt et bilde fra Fjordline jeg fant på Google av et av skipene deres,
 ### Data fetching
 Jeg simulerer data fetching ved å ha en lib/db.ts som leser data fra en lokal JSON-fil. Jeg gjør dette for at det senere skal være enkelt å bytte ut med en ekte database uten å endre større deler av koden.
 
-## Ekstra funksjonalitet jeg kanskje legger til:
-- Språkstøtte
-- Dark mode
+### Listing av avganger
+Jeg laget først et oppsett med en liste over DepartureCards, slik man har for flyselskaper og Vy for eksempel. Men etter å ha merket at Fjordline ikke har mange avganger om dagen, snudde jeg om designet på det tidspunktet og fokuserte på å fremheve de få avgangene som finnes, og heller vise mer informasjon om hver avgang og fremheve forholdene om bord.
+Tidligere visning:
+![Tidligere valg av avganger](log/image.png)
+
+## Ideer for videre utvikling
+- Bilder som indikerer byene, plassert i headeren på /departures på hver sin side
+- 
