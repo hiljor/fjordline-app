@@ -11,11 +11,6 @@ export default function DepartureSection({ outboundItems = [], returnItems = [],
   const { register, watch, setValue } = useFormContext();
   const formatTime = (dateStr: string) => 
     new Date(dateStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-  // Note: We keep these hooks at the top level
-  const selectedOutbound = watch("outboundTicket");
-  const selectedReturn = watch("returnTicket");
-
   return (
     <div className="space-y-12 pb-10">
       {/* OUTBOUND */}
@@ -79,8 +74,8 @@ export default function DepartureSection({ outboundItems = [], returnItems = [],
  */
 function TicketCarousel({ tickets, departureId, fieldName, register, setValue, watch }: any) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const selectedTicketType = watch(fieldName);
-  const anySelected = !!selectedTicketType;
+  const currentFormValue = watch(fieldName); // e.g. "IN123|Flex"
+  const anySelected = !!currentFormValue;
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -108,24 +103,25 @@ function TicketCarousel({ tickets, departureId, fieldName, register, setValue, w
         <ChevronRight size={20} />
       </button>
 
-      <div 
-        ref={scrollRef}
-        className="flex overflow-x-auto gap-3 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {tickets.map((ticket: any) => (
-          <div key={ticket.type} className="min-w-[90%] md:min-w-0 snap-center">
-            <TicketCard 
-              ticket={ticket}
-              departureId={departureId}
-              fieldName={fieldName}
-              register={register}
-              setValue={setValue}
-              isSelected={selectedTicketType === ticket.type}
-              anySelected={anySelected} 
-            />
-          </div>
-        ))}
+      <div ref={scrollRef} className="flex overflow-x-auto gap-3 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible">
+        {tickets.map((ticket: any) => {
+          const combinedValue = `${departureId}|${ticket.type}`;
+          return (
+            <div key={ticket.type} className="min-w-[90%] md:min-w-0 snap-center">
+              <TicketCard 
+                ticket={ticket}
+                departureId={departureId}
+                fieldName={fieldName}
+                register={register}
+                setValue={setValue}
+                watch={watch}
+                // Check if this specific ticket is the one stored in form state
+                isSelected={currentFormValue === combinedValue}
+                anySelected={anySelected} 
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -134,14 +130,22 @@ function TicketCarousel({ tickets, departureId, fieldName, register, setValue, w
 /**
  * Ticket Card
  */
-function TicketCard({ ticket, departureId, fieldName, register, isSelected, anySelected, setValue }: any) {
+function TicketCard({ ticket, departureId, fieldName, register, isSelected, anySelected, setValue, watch }: any) {
+  // Create a truly unique value for this specific ticket choice
+  const combinedValue = `${departureId}|${ticket.type}`;
+  
   const handleClick = () => {
-    setValue(fieldName, ticket.type, { shouldValidate: true });
+    // 1. Set the main ticket value (depId + type)
+    setValue(fieldName, combinedValue, { shouldValidate: true });
+    
+    // 2. Set the specific departure ID helper field
     const idField = fieldName.includes("outbound") ? "outboundDepartureId" : "returnDepartureId";
     setValue(idField, departureId, { shouldValidate: true });
   };
 
   const isFlex = ticket.type.toLowerCase().includes("flex");
+  
+  // A ticket is dimmed if something else in THIS journey section is selected
   const isDimmed = anySelected && !isSelected;
 
   return (
@@ -157,10 +161,15 @@ function TicketCard({ ticket, departureId, fieldName, register, isSelected, anyS
       transition={{ duration: 0.2, ease: "circOut" }}
       className={`
         relative flex flex-col p-4 rounded-[1.5rem] cursor-pointer border-2 h-full transition-shadow
-        ${isSelected ? 'bg-white shadow-lg ring-4 ring-brand/5' : 'bg-white shadow-sm'}
+        ${isSelected ? 'bg-white shadow-lg ring-4 ring-brand/5 border-brand' : 'bg-white shadow-sm border-slate-100'}
       `}
     >
-      <input type="radio" {...register(fieldName)} value={ticket.type} className="sr-only" />
+      <input 
+        type="radio" 
+        {...register(fieldName)} 
+        value={combinedValue} 
+        className="sr-only" 
+      />
       
       <div className="flex justify-between items-start mb-2">
         <div>
