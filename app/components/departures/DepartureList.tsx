@@ -10,7 +10,7 @@ interface DepartureListProps {
   accentColor?: string;
 }
 
-export default function DepartureList({ items, accentColor }: DepartureListProps) {
+export default function DepartureList({ items, accentColor, type }: DepartureListProps & { type: string }) {
   
   // Show 3 items initially
   const [visibleCount, setVisibleCount] = useState(3);
@@ -24,9 +24,9 @@ export default function DepartureList({ items, accentColor }: DepartureListProps
   return (
     <div className="space-y-4">
       <div className="grid gap-4">
-        {items.slice(0, visibleCount).map((dep) => (
-          <DepartureCard key={dep.id} departure={dep} accentColor={accentColor} />
-        ))}
+{items.slice(0, visibleCount).map((dep) => (
+        <DepartureCard key={dep.id} departure={dep} accentColor={accentColor} type={type} />
+      ))}
       </div>
 
       {hasMore && (

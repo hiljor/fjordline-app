@@ -5,14 +5,14 @@ import { Departure } from "@/app/types/departure";
 import { Moon, ChevronDown, Check, Info } from "lucide-react";
 import Link from "next/link";
 // Oppdatert import til den nye React-pakken
-import { motion, AnimatePresence, type Variants } from "motion/react";
+import { motion, AnimatePresence, Variants } from "motion/react";
 
 const dropdownVariants: Variants = {
   open: { 
     height: "auto", 
     opacity: 1,
     transition: {
-      height: { type: "spring" as const, stiffness: 100, damping: 20 },
+      height: { type: "spring", stiffness: 100, damping: 20 },
       opacity: { duration: 0.2, delay: 0.1 }
     }
   },
@@ -20,7 +20,7 @@ const dropdownVariants: Variants = {
     height: 0, 
     opacity: 0,
     transition: {
-      height: { type: "spring" as const, stiffness: 100, damping: 20 },
+      height: { type: "spring", stiffness: 100, damping: 20 },
       opacity: { duration: 0.15 }
     }
   }
@@ -28,10 +28,12 @@ const dropdownVariants: Variants = {
 
 export default function DepartureCard({ 
   departure, 
-  accentColor = "brand" 
+  accentColor = "brand" ,
+  type,
 }: { 
   departure: Departure, 
-  accentColor?: string
+  accentColor?: string,
+  type: string
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const lowestPrice = Math.min(...departure.ticketTypes.map(t => t.price));
@@ -54,7 +56,7 @@ export default function DepartureCard({
         <div className="flex items-center gap-6">
           <div className="text-right">
             <p className="text-[10px] font-bold text-slate-400 uppercase">Fra</p>
-            <p className={`text-3xl font-black text-${accentColor === 'brand' ? 'brand' : 'emerald-600'}`}>
+            <p className={`text-3xl font-black text-${accentColor}`}>
               {lowestPrice},-
             </p>
           </div>
@@ -85,7 +87,7 @@ export default function DepartureCard({
                     key={ticket.type} 
                     ticket={ticket} 
                     departureId={departure.id}
-                    accentColor={accentColor}
+                    type={type}
                   />
                 ))}
               </div>
@@ -97,40 +99,52 @@ export default function DepartureCard({
   );
 }
 
-function TicketOption({ ticket, departureId, accentColor }: { ticket: any, departureId: string, accentColor: string }) {
+function TicketOption({ 
+  ticket, 
+  departureId, 
+  type // 'outbound' | 'return'
+}: { 
+  ticket: any, 
+  departureId: string, 
+  type: string 
+}) {
   const isFlex = ticket.type.toLowerCase().includes("flex");
+  const inputId = `${type}-${departureId}-${ticket.type}`;
   
   return (
-    <motion.div 
-      whileHover={{ scale: 1.03, transition: { duration: 0.15 } }}
-      className="bg-white border-2 border-slate-200 rounded-2xl p-5 flex flex-col h-full hover:border-brand/70 transition-all group"
-    >
-      <div className="flex justify-between items-start mb-4">
-        <div>
-          <h4 className="font-black text-xl text-slate-900">{ticket.type}</h4>
-          <p className="text-2xl font-black text-brand mt-1">{ticket.price},-</p>
+    <label htmlFor={inputId} className="cursor-pointer group">
+      {/* Hidden native radio button */}
+      <input 
+        type="radio" 
+        id={inputId}
+        name={type === 'outbound' ? 'outboundTicket' : 'returnTicket'} 
+        value={`${departureId}|${ticket.type}`}
+        className="peer hidden"
+        required // Browser enforces selection before "Next" works
+      />
+      
+      <div className="h-full bg-white border-2 border-slate-200 rounded-2xl p-5 flex flex-col transition-all peer-checked:border-brand peer-checked:ring-2 peer-checked:ring-brand/20 peer-checked:bg-brand/5">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h4 className="font-black text-xl text-slate-900">{ticket.type}</h4>
+            <p className="text-2xl font-black text-brand mt-1">{ticket.price},-</p>
+          </div>
+          {/* Visual indicator of selection */}
+          <div className="w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center peer-checked:bg-brand peer-checked:border-brand">
+            <Check size={14} className="text-white opacity-0 peer-checked:opacity-100" />
+          </div>
         </div>
-        {isFlex && <span className="bg-brand/10 text-brand text-[10px] px-2 py-1 rounded-md font-black uppercase">Anbefalt</span>}
+
+        <ul className="space-y-2 mb-8 flex-1">
+          <Feature text="Standard sete inkludert" active={true} />
+          <Feature text="Refunderbar" active={isFlex} />
+        </ul>
+
+        <div className="w-full text-center py-3 rounded-xl font-black transition-all bg-slate-100 text-slate-600 group-hover:bg-slate-200 peer-checked:bg-brand peer-checked:text-white">
+          Velg {ticket.type}
+        </div>
       </div>
-
-      <ul className="space-y-2 mb-8 flex-1">
-        <Feature text="Standard sete inkludert" active={true} />
-        <Feature text="Refunderbar" active={isFlex} />
-        <Feature text="Endre dato" active={isFlex} />
-        <Feature text="Lunsjbuffet" active={ticket.type.includes("Premium")} />
-      </ul>
-
-      <Link 
-        href={`/checkout?departureId=${departureId}&type=${ticket.type}`}
-        className={`w-full text-center py-3 rounded-xl font-black transition-all ${
-          isFlex 
-          ? 'bg-brand text-white shadow-lg shadow-brand/20' 
-          : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-        }`}
-      >
-        Velg {ticket.type}
-      </Link>
-    </motion.div>
+    </label>
   );
 }
 
