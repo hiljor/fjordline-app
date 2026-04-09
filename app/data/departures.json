@@ -15,6 +15,21 @@
       "availableTickets": 40,
       "requiresCabin": false
     },
+    {
+      "id": "IN401",
+      "from": "bergen",
+      "to": "stavanger",
+      "departureTime": "2026-04-10T14:30:00",
+      "arrivalTime": "2026-04-10T20:00:00",
+      "ticketTypes": [
+        { "type": "club", "price": 200 },
+        { "type": "standard", "price": 225 },
+        { "type": "flex", "price": 250 }
+      ],
+      "vessel": "MS Stavangerfjord",
+      "availableTickets": 40,
+      "requiresCabin": false
+    },
         {
       "id": "IN121",
       "from": "bergen",
