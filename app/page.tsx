@@ -5,6 +5,6 @@ import SimpleHome from "./components/home/SimpleHome";
 
 export default function Home() {
   return (
-    <SimpleHome />
+    <HeroHome />
   );
 }

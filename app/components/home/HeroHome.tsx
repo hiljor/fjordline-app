@@ -8,7 +8,7 @@ return (
       {/* Denne seksjonen står helt stille bak alt innhold */}
       <div className="fixed inset-0 z-0 h-screen w-full">
         <Image
-          src="/images/hero-ferry.webp" // Stien til bildet ditt i public/
+          src="/images/hero.webp" // Stien til bildet ditt i public/
           alt="En Fjordline ferge på sjøen med kysten i bakgrunnen"
           fill // Fyller hele viewport
           priority // Prioriterer lasting
