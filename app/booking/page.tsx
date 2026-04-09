@@ -1,14 +1,19 @@
-import { getFilteredDepartures } from '../lib/db';
-import SearchForm from '../components/SearchForm';
-import BookingWizard from '../components/booking/BookingWizard';
+import { getFilteredDepartures } from "../lib/db";
+import SearchForm from "../components/SearchForm";
+import BookingWizard from "../components/booking/BookingWizard";
 
-export default async function DeparturesPage({ 
-  searchParams 
-}: { 
-  searchParams: Promise<{ from: string; to: string; date: string; returnDate?: string }> 
+export default async function DeparturesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    from: string;
+    to: string;
+    date: string;
+    returnDate?: string;
+  }>;
 }) {
   const params = await searchParams;
-  
+
   // 1. Fetch data on the server for speed and SEO
   const { departures, returns } = await getFilteredDepartures(params);
 
@@ -21,11 +26,13 @@ export default async function DeparturesPage({
         {/* Pass the data to the Client Component "Wizard" 
           which will handle React Hook Form state 
         */}
-        <BookingWizard 
-        outboundItems={departures} 
-        returnItems={returns} 
-        isRoundTripRequested={!!params.returnDate}
-      />
+        <BookingWizard
+          outboundItems={departures}
+          returnItems={returns}
+          outboundDate={params.date}
+          returnDate={params.returnDate}
+          isRoundTripRequested={!!params.returnDate}
+        />
       </div>
     </main>
   );

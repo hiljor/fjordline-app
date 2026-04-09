@@ -17,6 +17,8 @@ export default function BookingWizard({
   outboundItems,
   returnItems,
   isRoundTripRequested,
+  outboundDate,
+  returnDate
 }: any) {
   const [step, setStep] = useState(1);
 
@@ -143,6 +145,8 @@ export default function BookingWizard({
             <DepartureSection
               outboundItems={outboundItems}
               returnItems={returnItems}
+              outboundDate={outboundDate}
+              returnDate={returnDate}
             />
           )}
 

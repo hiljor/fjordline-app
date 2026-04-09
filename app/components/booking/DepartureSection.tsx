@@ -3,10 +3,10 @@
 import { useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { Departure } from "@/app/types/departure";
-import { Check, Ship, Moon, ArrowRight, Info, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, Ship, Moon, ArrowRight, Info, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import { motion } from "motion/react";
 
-export default function DepartureSection({ outboundItems, returnItems }: any) {
+export default function DepartureSection({ outboundItems, returnItems, outboundDate, returnDate }: any) {
   const { register, watch, setValue } = useFormContext();
   const formatTime = (dateStr: string) => 
     new Date(dateStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -15,7 +15,7 @@ export default function DepartureSection({ outboundItems, returnItems }: any) {
     <div className="space-y-12 pb-10">
       {/* OUTBOUND */}
       <div className="space-y-6">
-        <JourneyHeader title="Utreise" step={1} />
+        <JourneyHeader title="Utreise" date={outboundDate} step={1} />
         {outboundItems.map((dep: Departure) => (
           <div key={dep.id} className="space-y-4 bg-red-100 p-6 rounded-[2.5rem]">
             <ScheduleBar departure={dep} formatTime={formatTime} />
@@ -34,7 +34,7 @@ export default function DepartureSection({ outboundItems, returnItems }: any) {
       {/* RETURN */}
       {returnItems && returnItems.length > 0 && (
         <div className="space-y-6 pt-6 border-t border-slate-200">
-          <JourneyHeader title="Hjemreise" step={2} />
+          <JourneyHeader title="Hjemreise" date={returnDate} step={2} />
           {returnItems.map((dep: Departure) => (
             <div key={dep.id} className="space-y-4 bg-red-100 p-6 rounded-[2.5rem]">
               <ScheduleBar departure={dep} formatTime={formatTime} />
@@ -161,13 +161,23 @@ function TicketCard({ ticket, departureId, fieldName, register, isSelected, setV
 /**
  * Clean Journey Header (Replaces the dark header)
  */
-function JourneyHeader({ title, step }: { title: string; step: number }) {
+function JourneyHeader({ title, date, step }: { title: string; date: string; step: number }) {
   return (
-    <header className="flex items-center gap-4">
-      <div className="w-10 h-10 rounded-2xl bg-brand/10 text-brand flex items-center justify-center font-black text-lg">
-        {step}
+    <header className="flex flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+      <div className="flex items-center gap-4">
+        <div className="w-10 h-10 rounded-2xl bg-brand/10 text-brand flex items-center justify-center font-black text-lg">
+          {step}
+        </div>
+        <h2 className="text-2xl font-black text-slate-900 tracking-tight">{title}</h2>
       </div>
-      <h2 className="text-2xl font-black text-slate-900 tracking-tight">{title}</h2>
+
+      {/* Date displayed beside/below the title */}
+      <div className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-2xl shadow-sm self-start sm:self-auto">
+        <Calendar size={14} className="text-brand" />
+        <span className="text-l font-black text-slate-700 uppercase tracking-widest">
+          {date}
+        </span>
+      </div>
     </header>
   );
 }

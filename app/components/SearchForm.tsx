@@ -81,10 +81,6 @@ export default function SearchForm({ collapsible = false }: SearchFormProps) {
               <div className="space-y-1">
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Avreise</p>
                 <p className="text-xl md:text-2xl font-black text-slate-900 leading-none mb-2">{urlFrom}</p>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-50 border border-slate-100 rounded-xl w-fit">
-                   <Calendar size={12} className="text-brand" />
-                   <span className="text-l font-black text-slate-600 uppercase">{urlDate}</span>
-                </div>
               </div>
             </div>
 
@@ -122,12 +118,7 @@ export default function SearchForm({ collapsible = false }: SearchFormProps) {
               <div className="space-y-1 flex flex-col items-end">
                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Destinasjon</p>
                 <p className="text-xl md:text-2xl font-black text-slate-900 leading-none mb-2">{urlTo}</p>
-                {urlReturnDate && (
-                  <div className="flex items-center gap-2 px-3 py-1.5 bg-brand/5 border border-brand/10 rounded-xl w-fit">
-                    <ArrowRightLeft size={12} className="text-brand" />
-                    <span className="text-l font-black text-brand uppercase">{urlReturnDate}</span>
-                  </div>
-                )}
+              
               </div>
             </div>
 
