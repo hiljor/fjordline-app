@@ -25,7 +25,7 @@ export default function HeroHome() {
             Din vei til Danmark
           </h1>
           <p className="text-lg opacity-90 max-w-2xl mx-auto">
-            Bestill ferge mellom Norge og Danmark med de beste prisene og fleksible avganger.
+            Bestill behagelig ferge mellom Norge og Danmark.
           </p>
         </section>
 
@@ -37,7 +37,7 @@ export default function HeroHome() {
         {/* Hovedinnhold-seksjon: Reduced negative margin and adjusted z-index */}
         <section className="bg-white text-slate-900 pt-24 pb-24 px-4 mt-[-4rem] relative z-30 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] rounded-t-[3rem]">
           <div className="container mx-auto">
-            <h2 className="text-3xl font-black mb-12 tracking-tight text-center md:text-left">Populære ruter</h2>
+            <h2 className="text-3xl font-black mb-12 tracking-tight text-center md:text-left">Byer</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {["Bergen", "Stavanger"].map((city, index) => (
                 <div key={index} className="group rounded-[2rem] overflow-hidden shadow-sm border border-slate-100 bg-slate-50 hover:shadow-xl transition-all duration-300">
