@@ -18,7 +18,7 @@ export default async function DeparturesPage({
   const { departures, returns } = await getFilteredDepartures(params);
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-24 pb-24">
+    <main className="relative z-0 min-h-screen bg-slate-50 pt-24 pb-24">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Keep the collapsible search for quick changes */}
         <SearchForm collapsible={true} />

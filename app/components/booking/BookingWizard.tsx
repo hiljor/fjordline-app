@@ -61,7 +61,7 @@ export default function BookingWizard({
 
   return (
     <FormProvider {...methods}>
-      <div className="pb-32">
+      <div className="pt-24 pb-32 max-w-6xl mx-auto px-4">
         {/* Step Navigation - Always render this so hooks stay consistent */}
         <nav className="flex justify-between mb-12 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
           {["Avgang", "Lugar", "Kjøretøy", "Sammendrag"].map((label, i) => {
@@ -150,7 +150,7 @@ export default function BookingWizard({
 
         {/* Footer Navigation */}
         {!isDataMissing && (
-          <div className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-lg border-t p-4 z-50">
+          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 z-[100] shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
             <div className="max-w-4xl mx-auto flex justify-between items-center">
               <button
                 type="button"
