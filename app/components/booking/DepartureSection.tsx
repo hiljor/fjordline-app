@@ -144,7 +144,7 @@ function TicketCard({ ticket, departureId, fieldName, register, isSelected, anyS
         opacity: isDimmed ? 0.4 : 1,
         filter: isDimmed ? "grayscale(100%) brightness(0.9)" : "grayscale(0%) brightness(1)",
         scale: isDimmed ? 0.97 : 1,
-        borderColor: isSelected ? "#0066FF" : "#f1f5f9" 
+        borderColor: isSelected ? "var(--brand)" : "#f1f5f9"
       }}
       transition={{ duration: 0.2, ease: "circOut" }}
       className={`
