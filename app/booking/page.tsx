@@ -22,9 +22,10 @@ export default async function DeparturesPage({
           which will handle React Hook Form state 
         */}
         <BookingWizard 
-          outboundItems={departures} 
-          returnItems={returns} 
-        />
+        outboundItems={departures} 
+        returnItems={returns} 
+        isRoundTripRequested={!!params.returnDate}
+      />
       </div>
     </main>
   );
