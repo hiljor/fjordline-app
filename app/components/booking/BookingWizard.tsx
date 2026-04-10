@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import DepartureSection from "./DepartureSection";
+import DepartureSection from "./DepartureSection/DepartureSection";
 import SummarySection from "./SummarySection";
 import {
   CalendarX,
