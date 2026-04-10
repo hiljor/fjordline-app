@@ -2,15 +2,10 @@
 
 import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import DepartureSection from "./DepartureSection/DepartureSection";
-import SummarySection from "./SummarySection";
-import {
-  CalendarX,
-  Car,
-  CheckCircle,
-  Ship,
-  Ticket,
-} from "lucide-react";
+import DepartureSection from "../DepartureSection/DepartureSection";
+import SummarySection from "../SummarySection";
+import Nav from "./Nav";
+import MissingData from "./MissingData";
 
 /**
  * BookingWizard component that manages the multi-step booking process.
@@ -42,12 +37,12 @@ export default function BookingWizard({
 
   const { watch, handleSubmit } = methods;
 
-  // --- 1. DATA VALIDATION ---
+  // --- data validation
   const hasOutbound = outboundItems && outboundItems.length > 0;
   const hasReturn = returnItems && returnItems.length > 0;
   const isDataMissing = !hasOutbound || (isRoundTripRequested && !hasReturn);
 
-  // --- 2. PROGRESS LOGIC ---
+  // --- progress logic
   const canProgress = () => {
     if (isDataMissing) return false; // Cannot progress if there's no data
     const values = watch();
@@ -68,58 +63,13 @@ export default function BookingWizard({
   return (
     <FormProvider {...methods}>
       <div className="pt-24 pb-32 max-w-6xl mx-auto px-4">
-        {/* Step Navigation - Always render this so hooks stay consistent */}
-        <nav className="flex justify-between mb-12 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-          {["Avgang", "Lugar", "Kjøretøy", "Sammendrag"].map((label, i) => {
-            const stepNum = i + 1;
-            const isActive = step === stepNum;
-            const isCompleted = step > stepNum;
-            const icons = [Ship, Ticket, Car, CheckCircle];
-            const Icon = icons[i];
-            return (
-              <div key={label} className="flex items-center gap-3">
-                <span
-                  className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
-                    isActive
-                      ? "bg-brand text-white scale-110 shadow-lg shadow-brand/20"
-                      : isCompleted
-                        ? "bg-brand text-white"
-                        : "bg-slate-100 text-slate-400"
-                  }`}
-                >
-                  <Icon size={16} />
-                </span>
-                <span
-                  className={`hidden md:block font-bold text-sm ${isActive ? "text-slate-800" : "text-slate-400"}`}
-                >
-                  {label}
-                </span>
-              </div>
-            );
-          })}
-        </nav>
+        {/* Step Navigation*/}
+        <Nav step={step}/>
 
         {/* Step Views */}
         <div className="min-h-[400px]">
-          {/* CRITICAL FIX: Check for missing data INSIDE the step render logic 
-             rather than as an early return at the top of the file.
-          */}
           {isDataMissing ? (
-            <div className="bg-white p-12 rounded-[2rem] border-2 border-dashed border-slate-200 text-center space-y-6 shadow-sm">
-              <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto">
-                <CalendarX size={40} />
-              </div>
-              <div className="max-w-md mx-auto">
-                <h2 className="text-2xl font-black text-slate-900 mb-2">
-                  Ingen ledige avganger
-                </h2>
-                <p className="text-slate-500 leading-relaxed">
-                  {!hasOutbound
-                    ? "Vi fant dessverre ingen avganger på din valgte utreisedato."
-                    : "Vi fant avganger for utreisen, men ingen ledige returreiser."}
-                </p>
-              </div>
-            </div>
+            < MissingData hasOutbound={hasOutbound}/>
           ) : (
             <>
               {step === 1 && (

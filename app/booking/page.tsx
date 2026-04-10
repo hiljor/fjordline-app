@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import SearchForm from "../components/SearchForm";
-import BookingWizardDataWrapper from "../components/booking/BookingWizardDataWrapper";
-import BookingWizardSkeleton from "../components/booking/BookingWizardSkeleton";
+import BookingWizardDataWrapper from "../components/booking/BookingWizard/BookingWizardDataWrapper";
+import BookingWizardSkeleton from "../components/booking/BookingWizard/BookingWizardSkeleton";
 
 export default async function DeparturesPage({
   searchParams,
