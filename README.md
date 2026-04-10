@@ -60,18 +60,21 @@ Jeg har brukt et bilde fra Fjordline jeg fant på Google av et av skipene deres,
 Jeg simulerer data fetching ved å ha en lib/db.ts som leser data fra en lokal JSON-fil. Jeg gjør dette for at det senere skal være enkelt å bytte ut med en ekte database uten å endre større deler av koden.
 
 ### Listing av avganger
-Jeg laget først et oppsett med en liste over DepartureCards, slik man har for flyselskaper og Vy for eksempel. Men etter å ha merket at Fjordline ikke har mange avganger om dagen, snudde jeg om designet på det tidspunktet og fokuserte på å fremheve de få avgangene som finnes, og heller vise mer informasjon om hver avgang og fremheve forholdene om bord.
+Jeg laget først et oppsett med en liste over DepartureCards, slik man har for flyselskaper og Vy for eksempel. Men etter å ha merket at Fjordline ikke har mange avganger om dagen, og dessuten trenger informasjon slik som en hotellbooking gjør, snudde jeg om designet på det tidspunktet og fokuserte på å fremheve de få avgangene som finnes.
 Tidligere visning:
 ![Tidligere valg av avganger](log/image.png)
 
-Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av Fjordline sin booking, men simplifisert, gjort for å være oversiktelig og mobilvennlig, samt tilgjengelig.
+Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av Fjordline sin booking, men simplifisert, gjort for å være oversiktelig og mobilvennlig.
 
 ## TODO:
 - Sikre hva som skjer når det ikke er noen avganger tilgjengelig for søket
-- Wrap avganger i Suspense for å vise skeletons ved lasting
 - Rydd i håndtering av feil ved data fetching
 - Håndter kall til booking med manglende params
 
-## Ideer for videre utvikling
-- Bilder som indikerer byene, plassert i headeren på /departures på hver sin side
-- 
+## Videre utvikling
+
+### Ideer
+
+### Kjente bugs
+Med hvordan bilettene har blitt implementert er det noe kluss i fokuset som gjør at man ikke kan bekrefte en billett med mellomrom eller enter, som er manglende tilgjengelighet.
+
