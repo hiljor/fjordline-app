@@ -68,6 +68,7 @@ Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av 
 
 ## TODO:
 - Sikre hva som skjer når det ikke er noen avganger tilgjengelig for søket
+- Fiks: Hvis man på bookingsiden åpner formen og trykker "tur/retur" og lukker formen, er det fortsatt mulig å gå videre som om man reiser en vei, og det vises som om man har valgt tur/retur
 - Rydd i håndtering av feil ved data fetching
 - Håndter kall til booking med manglende params
 
