@@ -5,12 +5,11 @@ import { useFormContext } from "react-hook-form";
 import { Departure } from "@/app/types/departure";
 import { Check, Ship, Moon, Info, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import { motion } from "motion/react";
+import { formatTime } from "@/app/lib/utils";
 
 export default function DepartureSection({ outboundItems = [], returnItems = [], outboundDate, returnDate }: any) {
   
   const { register, watch, setValue } = useFormContext();
-  const formatTime = (dateStr: string) => 
-    new Date(dateStr).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   return (
     <div className="space-y-12 pb-10">
       {/* OUTBOUND */}
@@ -20,7 +19,7 @@ export default function DepartureSection({ outboundItems = [], returnItems = [],
         {outboundItems.length > 0 ? (
           outboundItems.map((dep: Departure) => (
             <div key={dep.id} className="space-y-4 bg-slate-50/50 p-4 md:p-6 rounded-[2.5rem] border border-slate-100">
-              <ScheduleBar departure={dep} formatTime={formatTime} />
+              <ScheduleBar departure={dep} />
               <TicketCarousel 
                 tickets={dep.ticketTypes}
                 departureId={dep.id}
@@ -47,7 +46,7 @@ export default function DepartureSection({ outboundItems = [], returnItems = [],
           {returnItems.length > 0 ? (
             returnItems.map((dep: Departure) => (
               <div key={dep.id} className="space-y-4 bg-slate-50/50 p-4 md:p-6 rounded-[2.5rem] border border-slate-100">
-                <ScheduleBar departure={dep} formatTime={formatTime} />
+                <ScheduleBar departure={dep} />
                 <TicketCarousel 
                   tickets={dep.ticketTypes}
                   departureId={dep.id}
@@ -225,7 +224,7 @@ function JourneyHeader({ title, date, step }: { title: string; date: string; ste
 /**
  * Schedule Bar
  */
-function ScheduleBar({ departure, formatTime }: any) {
+function ScheduleBar({ departure }: { departure: Departure;}) {
   const isOvernight = new Date(departure.arrivalTime) < new Date(departure.departureTime);
 
   return (
