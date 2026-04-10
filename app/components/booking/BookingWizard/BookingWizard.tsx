@@ -63,25 +63,38 @@ export default function BookingWizard({
         const outboundOk = values.outboundDepartureId && values.outboundTicket;
         const returnOk = values.returnDepartureId && values.returnTicket;
         return isRoundTripRequested ? outboundOk && returnOk : !!outboundOk;
+      // add more logic
       default:
         return true;
     }
   };
 
   const handleNext = () => {
-    if (canProgress()) setStep((s) => s + 1);
+    if (!canProgress()) return;
+
+    if (step === 4) {
+      // This triggers the React Hook Form validation and calls onSubmit if valid
+      handleSubmit(onSubmit)();
+    } else {
+      setStep((s) => s + 1);
+    }
+  };
+
+  const onSubmit = (data: any) => {
+    console.log("Final Booking Data:", data);
+    // Confirm booking and redirect to payment
   };
 
   return (
     <FormProvider {...methods}>
       <div className="pt-24 pb-32 max-w-6xl mx-auto px-4">
         {/* Step Navigation*/}
-        <Nav step={step}/>
+        <Nav step={step} />
 
         {/* Step Views */}
         <div className="min-h-[400px]">
           {isDataMissing ? (
-            < MissingData hasOutbound={hasOutbound}/>
+            <MissingData hasOutbound={hasOutbound} />
           ) : (
             <>
               {step === 1 && (
@@ -123,18 +136,20 @@ export default function BookingWizard({
               <button
                 type="button"
                 onClick={() => setStep((s) => s - 1)}
-                className={`px-8 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-all ${step === 1 ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+                className={`px-8 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-all ${
+                  step === 1 ? "opacity-0 pointer-events-none" : "opacity-100"
+                }`}
               >
                 Tilbake
               </button>
 
               <button
-                type="button"
+                type="button" // Keep as "button" to prevent default HTML form submission
                 disabled={!canProgress()}
                 onClick={handleNext}
                 className="bg-brand text-white px-12 py-4 rounded-2xl font-black text-lg hover:bg-brand-dark transition-all shadow-lg disabled:opacity-30 disabled:grayscale"
               >
-                Neste steg →
+                {step === 4 ? "Bekreft og betal" : "Neste steg →"}
               </button>
             </div>
           </div>
