@@ -61,6 +61,9 @@ Tidligere visning:
 
 Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av Fjordline sin booking, men simplifisert, gjort for å være oversiktelig og mobilvennlig. Jeg valgte å bruke react-hook-form for å gjøre det enkelt å samle inn informasjonen gitt all informasjonen som må samles (lugar/bil/kundeinfo)og for at endringer enkelt kan reflekteres i UI.
 
+### Håndtering av villspor
+Jeg la inn en not-found.tsx fil for å gjøre det mindre forvirrende ved 404 error, og dessuten rutet tilbake til hovedsiden fra booking dersom feil parametere blir brukt i /booking url'en.
+
 ## Videre utvikling
 Her er et raskt overblikk over de viktigste forbedringene jeg ville gjort videre:
 
