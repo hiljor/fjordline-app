@@ -39,22 +39,17 @@ Har selv bare gjort alt i ett prosjekt, og selv om jeg gjerne vil lære å sette
 
 ### Ruting
 - /: Hovedsiden som viser søkefelt
-- /departures: Siden som viser avgangsinformasjon basert på søkeargumentet
-- /checkout: Siden for å fullføre bestilling gitt søkeparameterne
+- /booking: Siden som viser avgangsinformasjon basert på søkeargumentet
 - /api/departures: API rute for å hente avgangsinformasjon basert på søkeargumentet
 
 ### Imports
 Jeg opplevde problemere med å importere ved hjelp av "@/seksjon/fil", og valgte derfor å bruke relative imports. Jeg ville helst fikset dette problemet gitt at det gjør det enklere å flytte filer, men fikser ikke det nå.
 
 ### Søkeparametere
-Jeg bruker URL-søkeparametere for å lagre søkeargumentene, som gjør det mulig å enkelt dele og gjenbruke søk.
-
-### Data
-Jeg valgte å bruke ID som inkludererer "IN" eller "UT" for å enkelt skille mellom innenriks og utenlands. Jeg satt "ticket" opp slik at ulike typer kan defineres og skilles mellom. Det er også en parameter for "cabinRequired" for å indikere at en avgang krever kabin, for å vise utvidingsmulighet for funksjonalitet.
-
+Jeg bruker URL-søkeparametere for å lagre søkeargumentene, som gjør det mulig å enkelt dele og gjenbruke søk. Ved mer tid kunne jeg også lagt flere parametere inn fra BookingWizard slik at man kan dele et ferdig utfylt skjema.
 
 ### Opphavsrettighet
-Jeg har brukt et bilde fra Fjordline jeg fant på Google av et av skipene deres, og realistisk sett trenger ikke dere annet enn egne bilder. Men i en ekte applikasjon ville jeg sjekket ordentlig opp i rettigheter og absolutt unngått å bruke det uten tillatelse.
+Jeg har brukt et bilde fra Fjordline jeg fant på Google av et av skipene deres (og bilder av Bergen og Stavanger), og realistisk sett trenger ikke dere annet enn egne bilder. Men i en ekte applikasjon ville jeg sjekket ordentlig opp i rettigheter og absolutt unngått å bruke det uten tillatelse.
 
 ### Data fetching
 Jeg simulerer data fetching ved å ha en lib/db.ts som leser data fra en lokal JSON-fil. Jeg gjør dette for at det senere skal være enkelt å bytte ut med en ekte database uten å endre større deler av koden.
@@ -67,8 +62,6 @@ Tidligere visning:
 Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av Fjordline sin booking, men simplifisert, gjort for å være oversiktelig og mobilvennlig.
 
 ## TODO:
-- Sikre hva som skjer når det ikke er noen avganger tilgjengelig for søket
-- Rydd i håndtering av feil ved data fetching
 - Håndter kall til booking med manglende params
 
 ## Videre utvikling
