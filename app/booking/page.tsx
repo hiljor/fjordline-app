@@ -1,6 +1,7 @@
-import { getFilteredDepartures } from "../lib/db";
+import { Suspense } from "react";
 import SearchForm from "../components/SearchForm";
-import BookingWizard from "../components/booking/BookingWizard";
+import BookingWizardDataWrapper from "../components/booking/BookingWizardDataWrapper";
+import BookingWizardSkeleton from "../components/booking/BookingWizardSkeleton";
 
 export default async function DeparturesPage({
   searchParams,
@@ -14,25 +15,15 @@ export default async function DeparturesPage({
 }) {
   const params = await searchParams;
 
-  // 1. Fetch data on the server for speed and SEO
-  const { departures, returns } = await getFilteredDepartures(params);
-
   return (
     <main className="relative z-0 min-h-screen bg-slate-50 pt-24 pb-24">
       <div className="container mx-auto px-4 max-w-4xl">
-        {/* Keep the collapsible search for quick changes */}
+        {/* Collapsible search for form editing */}
         <SearchForm collapsible={true} />
-
-        {/* Pass the data to the Client Component "Wizard" 
-          which will handle React Hook Form state 
-        */}
-        <BookingWizard
-          outboundItems={departures}
-          returnItems={returns}
-          outboundDate={params.date}
-          returnDate={params.returnDate}
-          isRoundTripRequested={!!params.returnDate}
-        />
+        {/* Booking Wizard that fetches data on the server and renders the client component */}
+        <Suspense key={JSON.stringify(params)} fallback={<BookingWizardSkeleton/>}>
+        <BookingWizardDataWrapper searchParams={params}/>
+        </Suspense>
       </div>
     </main>
   );

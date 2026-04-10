@@ -1,11 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import DepartureSection from "./DepartureSection";
 import SummarySection from "./SummarySection";
 import {
-  AlertCircle,
   CalendarX,
   Car,
   CheckCircle,
@@ -13,6 +12,13 @@ import {
   Ticket,
 } from "lucide-react";
 
+/**
+ * BookingWizard component that manages the multi-step booking process.
+ * Handles form state with React Hook Form and step navigation logic.
+ * Is a Client Component that receives pre-fetched data as props from the server.
+ * @param param0 
+ * @returns 
+ */
 export default function BookingWizard({
   outboundItems,
   returnItems,
