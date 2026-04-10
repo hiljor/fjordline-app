@@ -7,12 +7,24 @@ import SummarySection from "../SummarySection";
 import Nav from "./Nav";
 import MissingData from "./MissingData";
 
+interface BookingWizardProps {
+  /** Array of outbound departure options */
+  outboundItems: any[];
+  /** Array of return departure options */
+  returnItems: any[];
+  /** Whether a round trip was requested */
+  isRoundTripRequested: boolean;
+  /** Outbound departure date */
+  outboundDate: string;
+  /** Return departure date */
+  returnDate: string;
+}
+
 /**
  * BookingWizard component that manages the multi-step booking process.
  * Handles form state with React Hook Form and step navigation logic.
  * Is a Client Component that receives pre-fetched data as props from the server.
- * @param param0 
- * @returns 
+ * @param props - The booking wizard props
  */
 export default function BookingWizard({
   outboundItems,
@@ -20,7 +32,7 @@ export default function BookingWizard({
   isRoundTripRequested,
   outboundDate,
   returnDate,
-}: any) {
+}: BookingWizardProps) {
   const [step, setStep] = useState(1);
 
   const methods = useForm({

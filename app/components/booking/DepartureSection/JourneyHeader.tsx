@@ -1,9 +1,18 @@
 import { Calendar } from "lucide-react";
 
+interface JourneyHeaderProps {
+  /** The title to display in the header */
+  title: string;
+  /** The date to display in the header */
+  date: string;
+  /** The step number to display in the badge */
+  step: number;
+}
+
 /**
- * Journey Header
+ * Journey header component for ticket selection
  */
-export default function JourneyHeader({ title, date, step }: { title: string; date: string; step: number }) {
+export default function JourneyHeader({ title, date, step }: JourneyHeaderProps) {
   return (
     <header className="flex flex-row items-center justify-between gap-3 border-b border-slate-100 pb-4">
       <div className="flex items-center gap-4">

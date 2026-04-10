@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
 
+/**
+ * Main header component of this application
+ */
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,16 +14,16 @@ export default function Header() {
     <header className="sticky top-0 z-[110] w-full bg-white border-b border-slate-100 shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         
-        {/* Venstre side: Logo */}
+        {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-brand">
           <span>🚢</span>
           <span>fjordline</span>
         </Link>
 
-        {/* Høyre side: Navigasjon og Knapper samlet */}
+        {/* Right: Nav */}
         <div className="flex items-center gap-6">
           
-          {/* Desktop Navigation - flyttet hit */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 text-md font-medium">
             <Link href="/mine-reiser" className="hover:text-brand transition-colors text-slate-700">
               Mine bestillinger
@@ -32,16 +36,16 @@ export default function Header() {
               Logg inn
             </button>
 
-            {/* Mobil-meny knapp */}
+            {/* Mobile-menu button */}
             <button 
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 md:hidden text-brand focus:outline-none"
               aria-label="Toggle menu"
             >
               {isOpen ? (
-                <span className="text-2xl">✕</span>
+                <span className="text-2xl"><X/></span>
               ) : (
-                <span className="text-2xl">☰</span>
+                <span className="text-2xl"><Menu/></span>
               )}
             </button>
           </div>

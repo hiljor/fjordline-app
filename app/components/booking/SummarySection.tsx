@@ -1,10 +1,27 @@
-import { Ship, Clock, CheckCircle2, Car } from "lucide-react";
+import { formatTime } from "@/app/lib/utils";
+import { Ship, Clock } from "lucide-react";
 
+/**
+ * Props for the SummarySection component
+ */
+type SummarySectionProps = {
+  /** Watch function from react-hook-form to get form values */
+  watch: () => any;
+  /** Array of outbound departure items with ticket types */
+  outboundItems: any[];
+  /** Array of return departure items with ticket types */
+  returnItems: any[];
+};
+
+/**
+ * SummarySection - Displays a booking summary with outbound/return trips and total price
+ * Shows selected routes, times, ticket types, and calculates the total amount.
+ */
 export default function SummarySection({
   watch,
   outboundItems,
   returnItems,
-}: any) {
+}: SummarySectionProps) {
   const values = watch();
 
   // 1. Helper to extract data from the combined string "depId|ticketType"
@@ -76,20 +93,15 @@ export default function SummarySection({
         </div>
 
         {/* Grand Total Footer */}
-        <div className="bg-slate-900 text-white px-6 md:px-8 py-8 flex flex-col md:flex-row justify-between items-stretch md:items-center gap-2">
-          <div className="text-center md:text-left">
-            <p className="text-l font-bold text-slate-400 uppercase tracking-widest mb-1">
-              Totalbeløp
-            </p>
-          </div>
+        <div className="bg-slate-900 text-white px-6 md:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-3">
+          <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">
+            Totalbeløp
+          </p>
 
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-8">
-            <div className="text-2xl md:text-3xl font-black italic tracking-tighter text-white">
+          <div className="flex items-center gap-4">
+            <div className="text-xl md:text-2xl font-black italic tracking-tighter text-white">
               {totalPrice},-
             </div>
-            <button className="w-full md:w-auto bg-brand hover:scale-[1.02] text-white px-10 py-5 rounded-[1.5rem] font-black text-xl transition-all shadow-2xl shadow-brand/40 active:scale-95">
-              Betal nå
-            </button>
           </div>
         </div>
       </div>
@@ -162,11 +174,4 @@ function EmptyRow({ label }: { label: string }) {
       Ingen {label.toLowerCase()} valgt enda...
     </div>
   );
-}
-
-function formatTime(dateStr: string) {
-  return new Date(dateStr).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 }

@@ -1,11 +1,29 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 import TicketCard from "./TicketCard";
+import { TicketType } from "@/app/types/departure";
+import { FieldValues, UseFormReturn} from "react-hook-form";
+
+interface TicketCarouselProps {
+  /** Ticket types available */
+  tickets: TicketType[];
+  /** ID of the departure related to the tickets */
+  departureId: string;
+  /** Name of input field */
+  fieldName: "outboundTicket" | "returnTicket";
+  /** Context object of form */
+  formContext: UseFormReturn<FieldValues, any, FieldValues>;
+}
 
 /**
- * Carousel Component
+ * A wrapper that displays tickets for a departure. Shows a carousel on mobile, and displays a row on desktop.
+ * @param param0
+ * @returns 
  */
-export default function TicketCarousel({ tickets, departureId, fieldName, register, setValue, watch }: any) {
+export default function TicketCarousel({ tickets, departureId, fieldName, formContext }: TicketCarouselProps) {
+
+  const { register, watch, setValue } = formContext;
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const currentFormValue = watch(fieldName); // e.g. "IN123|Flex"
   const anySelected = !!currentFormValue;
@@ -45,9 +63,7 @@ export default function TicketCarousel({ tickets, departureId, fieldName, regist
                 ticket={ticket}
                 departureId={departureId}
                 fieldName={fieldName}
-                register={register}
-                setValue={setValue}
-                watch={watch}
+                formContext={formContext}
                 // Check if this specific ticket is the one stored in form state
                 isSelected={currentFormValue === combinedValue}
                 anySelected={anySelected} 

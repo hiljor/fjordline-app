@@ -18,6 +18,7 @@ export default async function DeparturesPage({
   return (
     <main className="relative z-0 min-h-screen bg-slate-50 pt-24 pb-24">
       <div className="container mx-auto px-4 max-w-4xl">
+        <h1 className="text-3xl font-bold mb-6 text-brand text-center">Din reise</h1>
         {/* Collapsible search for form editing */}
         <SearchForm collapsible={true} />
         {/* Booking Wizard that fetches data on the server and renders the client component */}

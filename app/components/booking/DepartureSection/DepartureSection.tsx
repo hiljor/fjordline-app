@@ -5,9 +5,24 @@ import TicketCarousel from "./TicketCarousel";
 import ScheduleBar from "./ScheduleBar";
 import JourneyHeader from "./JourneyHeader";
 
-export default function DepartureSection({ outboundItems = [], returnItems = [], outboundDate, returnDate }: any) {
+interface DepartureSectionProps {
+  /** Array of outbound departure items to display */
+  outboundItems?: Departure[];
+  /** Array of return departure items to display */
+  returnItems?: Departure[];
+  /** The selected outbound date */
+  outboundDate?: string;
+  /** The selected return date (optional for one-way trips) */
+  returnDate?: string;
+}
+
+/**
+ * 
+ * @param props The departure section props
+ */
+export default function DepartureSection({ outboundItems = [], returnItems = [], outboundDate, returnDate }: DepartureSectionProps) {
   
-  const { register, watch, setValue } = useFormContext();
+  const formContext = useFormContext();
   return (
     <div className="space-y-12 pb-10">
       {/* OUTBOUND */}
@@ -22,9 +37,7 @@ export default function DepartureSection({ outboundItems = [], returnItems = [],
                 tickets={dep.ticketTypes}
                 departureId={dep.id}
                 fieldName="outboundTicket"
-                register={register}
-                setValue={setValue}
-                watch={watch}
+                formContext={formContext}
               />
             </div>
           ))
@@ -49,9 +62,7 @@ export default function DepartureSection({ outboundItems = [], returnItems = [],
                   tickets={dep.ticketTypes}
                   departureId={dep.id}
                   fieldName="returnTicket"
-                  register={register}
-                  setValue={setValue}
-                  watch={watch}
+                  formContext={formContext}
                 />
               </div>
             ))
