@@ -3,7 +3,9 @@ import { ResolvedSearchParams as BookingSearchParams } from "../types/searchPara
 
 export async function fetchDepartures(): Promise<Departure[]> {
   const response = await import("../data/departures.json");
-  return response.departures;
+    // simulate server latency
+  await new Promise(resolve => setTimeout(resolve, 3000));
+  return response.departures as Departure[];
 }
 
 /**
@@ -38,9 +40,6 @@ export async function fetchFilteredDepartures(filters: BookingSearchParams): Pro
       return matchesFrom && matchesTo && matchesDate;
     });
   }
-  
-  // simulate server latency
-  await new Promise(resolve => setTimeout(resolve, 3000));
 
   return { departures: filteredDepartures, returns: filteredReturns };
 }
