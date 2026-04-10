@@ -1,11 +1,17 @@
 import { Departure } from "../types/departure";
+import { ResolvedSearchParams as BookingSearchParams } from "../types/searchParams";
 
 export async function fetchDepartures(): Promise<Departure[]> {
   const response = await import("../data/departures.json");
   return response.departures;
 }
 
-export async function getFilteredDepartures(filters: { from: string; to: string; date: string, returnDate?: string }): Promise<{ departures: Departure[]; returns: Departure[] }> {
+/**
+ * Fetches departures filtered by the search params given as input.
+ * @param filters 
+ * @returns relevant departures and returns. If no return is requested, returns in empty.
+ */
+export async function fetchFilteredDepartures(filters: BookingSearchParams): Promise<{ departures: Departure[]; returns: Departure[] }> {
   const allDepartures = await fetchDepartures();
   const from = filters.from?.toLowerCase();
   const to = filters.to?.toLowerCase();
