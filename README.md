@@ -70,6 +70,7 @@ Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av 
 - Sikre hva som skjer når det ikke er noen avganger tilgjengelig for søket
 - Wrap avganger i Suspense for å vise skeletons ved lasting
 - Rydd i håndtering av feil ved data fetching
+- Håndter kall til booking med manglende params
 
 ## Ideer for videre utvikling
 - Bilder som indikerer byene, plassert i headeren på /departures på hver sin side
