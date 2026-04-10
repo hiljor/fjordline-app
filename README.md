@@ -39,7 +39,7 @@ Har selv bare gjort alt i ett prosjekt, og selv om jeg gjerne vil lære å sette
 
 ### Ruting
 - /: Hovedsiden som viser søkefelt
-- /booking: Siden som viser avgangsinformasjon basert på søkeargumentet
+- /booking: Siden som viser den detaljerte bookingportalen
 - /api/departures: API rute for å hente avgangsinformasjon basert på søkeargumentet
 
 ### Imports
@@ -59,15 +59,30 @@ Jeg laget først et oppsett med en liste over DepartureCards, slik man har for f
 Tidligere visning:
 ![Tidligere valg av avganger](log/image.png)
 
-Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av Fjordline sin booking, men simplifisert, gjort for å være oversiktelig og mobilvennlig.
-
-## TODO:
-- Håndter kall til booking med manglende params
+Løsningen jeg valgte er rettet mot en oversiktlig booking. Den er inspirert av Fjordline sin booking, men simplifisert, gjort for å være oversiktelig og mobilvennlig. Jeg valgte å bruke react-hook-form for å gjøre det enkelt å samle inn informasjonen gitt all informasjonen som må samles (lugar/bil/kundeinfo)og for at endringer enkelt kan reflekteres i UI.
 
 ## Videre utvikling
+Her er et raskt overblikk over de viktigste forbedringene jeg ville gjort videre:
 
-### Ideer
+- **Gjenbrukt Tailwind-styling og basiskomponenter**
+  - Lag universelle knapper, input-felt og andre UI-komponenter.
+  - Gjenbruk Tailwind-styling strings for et mer sammenhengende og pålitelig design.
 
-### Kjente bugs
-Med hvordan bilettene har blitt implementert er det noe kluss i fokuset som gjør at man ikke kan bekrefte en billett med mellomrom eller enter, som er manglende tilgjengelighet.
+- **React Hook Form + Zod for data validation**
+  - Bytt ut dagens prototype-validering med `zod` for streng datastruktur.
+  - Utnytt mer av `react-hook-form` sin funksjonalitet, inkludert `trigger` og bedre feilhåndtering.
+
+- **Når ingen avganger er funnet**
+  - Åpne søkeskjemaet automatisk ved null treff.
+  - Vurder å vise en kalender eller tilgjengelige reisedager og priser.
+
+- **Tydeligere skille mellom avganger**
+  - Forsterk `JourneyHeader` slik at hver avgang skiller seg tydelig fra billettkortene.
+  - Gjør starten på hver avgang mer visuelt distinkt.
+
+- **Aktivere "neste steg ->" knappen**
+  - Gjør knappen hover-aktiv og visuelt tydelig som klikkbar for mer intuitiv knapp.
+
+## Kjente bugs
+Med hvordan bilettene har blitt implementert er det noe kluss i fokuset som gjør at man ikke kan bekrefte en billett med mellomrom eller enter, som er manglende tilgjengelighet. Med mer tid hadde jeg satt meg inn i dette, og dessuten startet med en mer grundig dataflow logikk med zod og react-hook-form som nevnt.
 
