@@ -8,7 +8,9 @@ import { Moon, Ship } from "lucide-react";
  * @returns 
  */
 export default function ScheduleBar({ departure }: { departure: Departure;}) {
-  const isOvernight = new Date(departure.arrivalTime) < new Date(departure.departureTime);
+  // Check if the departure is overnight
+  const isOvernight = new Date(departure.departureTime) < new Date(departure.arrivalTime);
+  console.log(isOvernight)
 
   return (
     <div className="bg-white border border-slate-200 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] shadow-sm">
@@ -20,13 +22,12 @@ export default function ScheduleBar({ departure }: { departure: Departure;}) {
               <p className="text-xl md:text-2xl font-black text-slate-900">{formatTime(departure.departureTime)}</p>
             </div>
             <div className="flex flex-col items-center gap-1 min-w-[50px] md:min-w-[80px]">
-              {isOvernight && (
-                <div className="flex items-center gap-1 text-[9px] font-bold text-indigo-500 uppercase tracking-tighter">
-                  <Moon size={10} fill="currentColor" /> 
-                  <span>Natt</span>
-                </div>
-              )}
               <div className="h-[2px] w-full bg-slate-200 relative">
+                {isOvernight && (
+                  <div className="absolute left-1/2 -translate-x-1/2 -top-[9px] flex items-center justify-center">
+                    <Moon size={10} fill="currentColor" className="text-indigo-500" /> 
+                  </div>
+                )}
                 <div className="absolute right-0 -top-[3px] w-2 h-2 border-t-2 border-r-2 border-slate-300 rotate-45" />
               </div>
             </div>
