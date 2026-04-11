@@ -10,7 +10,7 @@ import { Moon, Ship } from "lucide-react";
 export default function ScheduleBar({ departure }: { departure: Departure;}) {
   // Check if the departure is overnight
   const isOvernight = new Date(departure.departureTime) < new Date(departure.arrivalTime);
-  console.log(isOvernight)
+  const duration = Math.round((new Date(departure.arrivalTime).getTime() - new Date(departure.departureTime).getTime()) / 60000 / 60 * 10) / 10
 
   return (
     <div className="bg-white border border-slate-200 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] shadow-sm">
@@ -22,12 +22,8 @@ export default function ScheduleBar({ departure }: { departure: Departure;}) {
               <p className="text-xl md:text-2xl font-black text-slate-900">{formatTime(departure.departureTime)}</p>
             </div>
             <div className="flex flex-col items-center gap-1 min-w-[50px] md:min-w-[80px]">
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{duration}h</p>
               <div className="h-[2px] w-full bg-slate-200 relative">
-                {isOvernight && (
-                  <div className="absolute left-1/2 -translate-x-1/2 -top-[9px] flex items-center justify-center">
-                    <Moon size={10} fill="currentColor" className="text-indigo-500" /> 
-                  </div>
-                )}
                 <div className="absolute right-0 -top-[3px] w-2 h-2 border-t-2 border-r-2 border-slate-300 rotate-45" />
               </div>
             </div>
@@ -35,7 +31,7 @@ export default function ScheduleBar({ departure }: { departure: Departure;}) {
               <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">Ankomst</p>
               <div className="flex items-baseline gap-1">
                 <p className="text-xl md:text-2xl font-black text-slate-900">{formatTime(departure.arrivalTime)}</p>
-                {isOvernight && <span className="text-xs font-bold text-indigo-500">+1</span>}
+                {isOvernight && <span className="text-m font-bold text-brand cursor-help" title="Denne avgangen ankommer destinasjonen neste dag">+1</span>}
               </div>
             </div>
           </div>
