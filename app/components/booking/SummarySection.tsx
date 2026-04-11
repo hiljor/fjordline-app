@@ -62,7 +62,7 @@ export default function SummarySection({
 
         <div className="divide-y divide-slate-100">
           {/* Outbound Row */}
-          {outboundData ? (
+          {outboundData && (
             <SummaryRow
               label="Utreise"
               from={outboundData.departure.from}
@@ -71,12 +71,10 @@ export default function SummarySection({
               ticketType={outboundData.ticketType}
               price={outboundPrice}
             />
-          ) : (
-            <EmptyRow label="Utreise" />
           )}
 
           {/* Return Row */}
-          {returnData ? (
+          {returnData && (
             <SummaryRow
               label="Hjemreise"
               from={returnData.departure.from}
@@ -85,11 +83,7 @@ export default function SummarySection({
               ticketType={returnData.ticketType}
               price={returnPrice}
             />
-          ) : values.returnDate ? (
-            <EmptyRow label="Hjemreise" />
-          ) : null}
-
-          {/* Could have a vehicle Row (if applicable), otherwise in the same row as ticket */}
+          )}
         </div>
 
         {/* Grand Total Footer */}
@@ -164,14 +158,6 @@ function SummaryRow({ label, from, to, time, ticketType, price }: any) {
           {price},-
         </p>
       </div>
-    </div>
-  );
-}
-
-function EmptyRow({ label }: { label: string }) {
-  return (
-    <div className="px-8 py-6 text-slate-400 italic text-sm">
-      Ingen {label.toLowerCase()} valgt enda...
     </div>
   );
 }
