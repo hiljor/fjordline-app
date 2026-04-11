@@ -78,6 +78,9 @@ Her er et raskt overblikk over de viktigste forbedringene jeg ville gjort videre
 - **Commit språk**
   - Jeg forsøkte å bruke norsk i commitene mine, men etter vane snek det seg inn mye engelsk. Engelsk hadde dessuten vert mer naturlig når jeg skriver dokumentasjonen på engelsk, så jeg ville heller bare brukt engelsk.
 
+- **Klikke på steg i booking portal**
+  - Jeg ville gjort det mulig å trykke på ikonene (båt, billett, bil etc) for å gå tilbake til disse stegene i portalen.
+
 ## Kjente bugs
 - Med hvordan bilettene har blitt implementert er det noe kluss i fokuset som gjør at man ikke kan bekrefte en billett med mellomrom eller enter, som er manglende tilgjengelighet. Med mer tid hadde jeg satt meg inn i dette, og dessuten startet med en mer grundig dataflow logikk med zod og react-hook-form som nevnt.
 - Jeg opplevde problemere med å importere ved hjelp av "@/seksjon/fil", og valgte derfor å bruke relative imports. Jeg ville helst fikset dette problemet gitt at det gjør det enklere å flytte filer.
