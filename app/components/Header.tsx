@@ -32,9 +32,9 @@ export default function Header() {
 
           {/* Action Buttons & Mobile Trigger */}
           <div className="flex items-center gap-2">
-            <button className="hidden sm:block rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:opacity-90 transition-all">
+            <Link href="/login" className="hidden sm:block rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white hover:opacity-90 transition-all">
               Logg inn
-            </button>
+            </Link>
 
             {/* Mobile-menu button */}
             <button 

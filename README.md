@@ -47,6 +47,9 @@ Deres eksisterende applikasjon er moderne, intuitiv og mobil-vennlig, og derfor 
 - **UI for overnattingsreise**
   - Jeg endret fra å ha et månesymbol til å bruke "+1" med hover-over tekst for å gjøre nattereiser tydelige.
 
+- **Cursor-hover**
+  - Dette var noe jeg raskt satt på til slutt og gjorde vondt i sjelen og gjøre manuelt. Jeg ville lagt dette inn i en egen button component for god gjenbruk ellers.
+
 ## Videre utvikling
 Her er et raskt overblikk over de viktigste forbedringene jeg ville gjort videre:
 
@@ -71,6 +74,9 @@ Her er et raskt overblikk over de viktigste forbedringene jeg ville gjort videre
 
 - **Aktivere "neste steg ->" knappen**
   - Gjør knappen hover-aktiv og visuelt tydelig som klikkbar for mer intuitiv knapp.
+
+- **Commit språk**
+  - Jeg forsøkte å bruke norsk i commitene mine, men etter vane snek det seg inn mye engelsk. Engelsk hadde dessuten vert mer naturlig når jeg skriver dokumentasjonen på engelsk, så jeg ville heller bare brukt engelsk.
 
 ## Kjente bugs
 - Med hvordan bilettene har blitt implementert er det noe kluss i fokuset som gjør at man ikke kan bekrefte en billett med mellomrom eller enter, som er manglende tilgjengelighet. Med mer tid hadde jeg satt meg inn i dette, og dessuten startet med en mer grundig dataflow logikk med zod og react-hook-form som nevnt.

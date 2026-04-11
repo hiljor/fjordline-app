@@ -62,7 +62,7 @@ export default function SearchForm({ collapsible = false }: SearchFormProps) {
             }
             setIsEditing(!isEditing);
           }}
-          className={`w-full text-left group relative p-6 md:p-10 transition-all rounded-[2.5rem] ${
+          className={`w-full text-left group relative p-6 md:p-10 transition-all rounded-[2.5rem] cursor-pointer ${
             isEditing
               ? "bg-slate-50 shadow-inner"
               : "hover:bg-slate-50/50 bg-white"
@@ -229,7 +229,7 @@ export default function SearchForm({ collapsible = false }: SearchFormProps) {
                   <div className="md:col-span-4 mt-2">
                     <button
                       type="submit"
-                      className="w-full bg-brand hover:bg-brand-dark text-white font-black py-5 rounded-[1.5rem] transition-all shadow-lg shadow-brand/20 active:scale-[0.98]"
+                      className="w-full bg-brand hover:bg-brand-dark text-white font-black py-5 rounded-[1.5rem] transition-all shadow-lg shadow-brand/20 active:scale-[0.98] cursor-pointer"
                     >
                       {collapsible ? "OPPDATER SØK" : "FINN AVGANGER"}
                     </button>

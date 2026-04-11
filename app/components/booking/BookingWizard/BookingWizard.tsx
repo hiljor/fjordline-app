@@ -136,7 +136,7 @@ export default function BookingWizard({
               <button
                 type="button"
                 onClick={() => setStep((s) => s - 1)}
-                className={`px-8 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-all ${
+                className={`px-8 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-all cursor-pointer ${
                   step === 1 ? "opacity-0 pointer-events-none" : "opacity-100"
                 }`}
               >
@@ -147,7 +147,7 @@ export default function BookingWizard({
                 type="button" // Keep as "button" to prevent default HTML form submission
                 disabled={!canProgress()}
                 onClick={handleNext}
-                className="bg-brand text-white px-12 py-4 rounded-2xl font-black text-lg hover:bg-brand-dark transition-all shadow-lg disabled:opacity-30 disabled:grayscale"
+                className="bg-brand text-white px-12 py-4 rounded-2xl font-black text-lg hover:bg-brand-dark transition-all shadow-lg disabled:opacity-30 disabled:grayscale disabled:cursor-not-allowed cursor-pointer"
               >
                 {step === 4 ? "Bekreft og betal" : "Neste steg →"}
               </button>
