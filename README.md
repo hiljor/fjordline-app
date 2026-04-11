@@ -75,6 +75,7 @@ Her er et raskt overblikk over de viktigste forbedringene jeg ville gjort videre
 ## Kjente bugs
 - Med hvordan bilettene har blitt implementert er det noe kluss i fokuset som gjør at man ikke kan bekrefte en billett med mellomrom eller enter, som er manglende tilgjengelighet. Med mer tid hadde jeg satt meg inn i dette, og dessuten startet med en mer grundig dataflow logikk med zod og react-hook-form som nevnt.
 - Jeg opplevde problemere med å importere ved hjelp av "@/seksjon/fil", og valgte derfor å bruke relative imports. Jeg ville helst fikset dette problemet gitt at det gjør det enklere å flytte filer.
+- Man kan gi tullete parametere til bookingportalen, som /booking?from=Bergen&to=Stavanger&date=hei, og visen rendres fortsatt. Dette ville vert fikset ved ordentlig valideringsverktøy som zod.
 
 TODO:
 Legg til måne ved overnattingsbookinger
