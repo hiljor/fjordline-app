@@ -22,7 +22,7 @@ export default function ScheduleBar({ departure }: { departure: Departure;}) {
               <p className="text-xl md:text-2xl font-black text-slate-900">{formatTime(departure.departureTime)}</p>
             </div>
             <div className="flex flex-col items-center gap-1 min-w-[50px] md:min-w-[80px]">
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{duration}h</p>
+              <p className="text-xs font-bold text-slate-400 tracking-widest">{duration}h</p>
               <div className="h-[2px] w-full bg-slate-200 relative">
                 <div className="absolute right-0 -top-[3px] w-2 h-2 border-t-2 border-r-2 border-slate-300 rotate-45" />
               </div>
